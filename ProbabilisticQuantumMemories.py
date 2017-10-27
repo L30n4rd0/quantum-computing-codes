@@ -74,4 +74,4 @@ print (saida2)
 
 saida3 = nXor(saida2)
 
-print saida3
+print (saida3)
