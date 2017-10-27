@@ -29,6 +29,18 @@ def notXor(qubit):
             qubitTemp = qubitTemp.flip(indiceM + i)
         
         qubitTemp = qubitTemp.flip(indiceM + i)
+        
+    return qubitTemp
+
+def nXor(qubit):
+    
+    qubitTemp = Qubit(qubit)
+    
+    for i in range(numeroBits):
+        if( qubitTemp[indiceM + i] == 0):
+            return qubitTemp
+        
+    qubitTemp = qubitTemp.flip(indiceU1)
     
     return qubitTemp
 
@@ -59,3 +71,7 @@ print (saida1)
 saida2 = notXor(saida1)
 
 print (saida2)
+
+saida3 = nXor(saida2)
+
+print saida3
