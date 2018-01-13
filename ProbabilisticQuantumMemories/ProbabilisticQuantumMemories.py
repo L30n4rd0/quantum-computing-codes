@@ -3,7 +3,7 @@
 """
 Created on Thu Oct 26 10:28:46 2017
 
-@author: leonardo
+@author: um colega da cadeira de quantica
 """
 
 from sympy.physics.quantum.qubit import Qubit
