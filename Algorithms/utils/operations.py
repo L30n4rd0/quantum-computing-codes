@@ -101,6 +101,40 @@ def apply_n_tensor_to(tensor_number, matrix_u):
         
     # Returning tensor result_matrix
     return result_matrix
+
+def apply_tensor_to_matrices_vector(matrices_vector):
+    
+    """
+    Description:
+        Make tensor product between all gates or psi states on vector
+    Required Params:
+        matrices_vector: Any matrices vector containing gates or psi states
+    Optional Params:
+        None
+    Return Value:
+        A matrix of tensor product between all gates or psi states on vector
+    Example:
+        >>> identity = [[1,0],[0,1]]
+        >>> apply_tensor_to_matrices_vector([identity, identity, identity])
+        [[1 0 0 0 0 0 0 0]
+        [0 1 0 0 0 0 0 0]
+        [0 0 1 0 0 0 0 0]
+        [0 0 0 1 0 0 0 0]
+        [0 0 0 0 1 0 0 0]
+        [0 0 0 0 0 1 0 0]
+        [0 0 0 0 0 0 1 0]
+        [0 0 0 0 0 0 0 1]]
+    """
+    
+    # Initing result_matrix
+    result_matrix = np.array(matrices_vector[0], dtype = complex)
+    
+    # Applying tensor product between all matrices
+    for i in range(1, len(matrices_vector)):
+        result_matrix = apply_tensor(result_matrix, np.array(matrices_vector[i], dtype = complex))
+        
+    # Returning tensor result_matrix
+    return result_matrix
     
 def apply_gate_to_psi(matrix_gate, matrix_psi):
     
