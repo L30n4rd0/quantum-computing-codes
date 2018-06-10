@@ -97,7 +97,7 @@ def create_inversion_about_mean_gate(n_qbits):
 if __name__ == '__main__':
     
     # Number of qbits that algorithm will computer
-    n = 4
+    n = 12
     
     # Index number of qbit that oracle gate will mark
     # For example: the penultimate qbit index number (2**n - 2)

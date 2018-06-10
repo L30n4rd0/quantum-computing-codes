@@ -5,6 +5,7 @@ Created on 14 de jan de 2018
 '''
 
 import numpy as np
+from builtins import int
 
 def apply_tensor(matrix_a, matrix_b):
     
@@ -164,3 +165,14 @@ def apply_gate_to_psi(matrix_gate, matrix_psi):
     # Returning psi_result
     return psi_result
 
+def printPSI(psi):
+    
+    # Qubtis number 'n' used on the circuit
+    n_size = np.log2(len(psi))
+    n_size = int(n_size)
+    
+    qubit = 0
+    
+    for amplitude in psi:
+        print( amplitude[0], '\t|%s> %d' % (np.binary_repr(qubit, n_size), qubit) )
+        qubit += 1

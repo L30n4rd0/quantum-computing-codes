@@ -4,6 +4,14 @@ Created on 3 de jan de 2018
 @author: leonardo
 '''
 
+# Checking the version of PYTHON; we only support > 3.5
+import sys
+if sys.version_info < (3,5):
+    raise Exception('Please use Python version 3.5 or greater.')
+       
+from qiskit import QuantumProgram
+import Qconfig
+
 def printResult(dictionary):
     
     try:
@@ -23,14 +31,6 @@ def printResult(dictionary):
     except:
         pass
 
-# Checking the version of PYTHON; we only support > 3.5
-import sys
-if sys.version_info < (3,5):
-    raise Exception('Please use Python version 3.5 or greater.')
-       
-from qiskit import QuantumProgram
-import Qconfig
-   
 # Creating Programs create your first QuantumProgram object instance.
 qp = QuantumProgram()
    
@@ -73,11 +73,11 @@ print(QASM_source)
    
 # Compiled and execute in the local_qasm_simulator
 # result = qp.execute(['test_circuit'], backend='local_qasm_simulator', shots=1024)
-result = qp.execute(['test_circuit'], backend='ibmqx2', shots=1024, max_credits=3)
-   
-# Show the results
-print(result)
-printResult(result.get_data('test_circuit'))
+# result = qp.execute(['test_circuit'], backend='ibmqx5', shots=1024, max_credits=3)
+#    
+# # Show the results
+# print(result)
+# printResult(result.get_data('test_circuit'))
 
-# dictionary = {'time': 22.825604915618896, 'counts': {'00000': 23, '00001': 11, '00010': 11, '00011': 43, '00100': 4, '00101': 77, '00110': 48, '00111': 807}, 'date': '2018-01-11T14:32:31.238Z'}
-# printResult(dictionary)
+dictionary = {'time': 22.825604915618896, 'counts': {'00000': 23, '00001': 11, '00010': 11, '00011': 43, '00100': 4, '00101': 77, '00110': 48, '00111': 807}, 'date': '2018-01-11T14:32:31.238Z'}
+printResult(dictionary)

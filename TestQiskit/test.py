@@ -9,7 +9,7 @@ import Qconfig
 
 # Creating Programs create your first QuantumProgram object instance.
 Q_program = QuantumProgram()
-Q_program.set_api(Qconfig.APItoken, Qconfig.config["url"], verify=False,
+Q_program.set_api(Qconfig.APItoken, Qconfig.config["url"], verify=True,
                   hub=Qconfig.config["hub"],
                   group=Qconfig.config["group"],
                   project=Qconfig.config["project"])
