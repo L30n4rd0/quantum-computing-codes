@@ -6,6 +6,7 @@ Created on 14 de jan de 2018
 
 import numpy as np
 from builtins import int
+from numpy import sqrt
 
 def apply_tensor(matrix_a, matrix_b):
     
@@ -165,9 +166,33 @@ def apply_gate_to_psi(matrix_gate, matrix_psi):
     # Returning psi_result
     return psi_result
 
+def apply_projective_operator(operator, psi):
+
+    # operator|psi> = (operator * |psi>) / sqrt(<psi| * operator * |psi>))
+    
+    # (operator * |psi>)
+    result = apply_gate_to_psi(operator, psi)
+    
+    # operator * |psi>)    
+    normalizador = np.dot(operator, psi)
+    
+    # transposed psi
+    psi_t = np.transpose(psi)
+    
+    # <psi| * operator * |psi>)
+    normalizador = np.dot(psi_t, normalizador)
+    
+    # sqrt(<psi| * operator * |psi>))
+    normalizador = sqrt(normalizador)
+    
+    # (operator * |psi>) / sqrt(<psi| * operator * |psi>))
+    result = (1 / normalizador[0][0]) * result
+    
+    return result
+
 def printPSI(psi):
     
-    # Qubtis number 'n' used on the circuit
+    # Qubits number 'n' used on the circuit
     n_size = np.log2(len(psi))
     n_size = int(n_size)
     
@@ -176,3 +201,9 @@ def printPSI(psi):
     for amplitude in psi:
         print( amplitude[0], '\t|%s> %d' % (np.binary_repr(qubit, n_size), qubit) )
         qubit += 1
+        
+#     temp = 2 * np.dot(psi, np.transpose(psi)) - np.identity(2**n_size, dtype=complex)
+#     print(temp)
+#     print("unitaria")
+#     print(np.dot(temp, np.transpose(temp)))
+    

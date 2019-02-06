@@ -6,7 +6,7 @@ Created on 13 de jan de 2018
 
 import numpy as np
 from utils.gates import i, x, y, z, h
-from utils.qbits import qbit_zero, qbit_one
+from utils.qbits import qubit_zero, qubit_one
 from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi
 
 def create_uf_gate(n_qbits):
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     uf = create_uf_gate(n)
     
     # psi_0 - Creating tensor product between inputs: X1 = |0> and X2 = |0>
-    psi = apply_n_tensor_to(2 * n, qbit_zero)
+    psi = apply_n_tensor_to(2 * n, qubit_zero)
     
     # psi_1 - Applying tensor_h_i to psi_0
     psi = apply_gate_to_psi(tensor_h_i, psi)

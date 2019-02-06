@@ -6,7 +6,7 @@ Created on 13 de jan de 2018
 
 import numpy as np
 from utils.gates import i, x, y, z, h
-from utils.qbits import qbit_zero, qbit_one
+from utils.qbits import qubit_zero, qubit_one
 from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi
 
 def create_phase_inversion_gate(n_qbits, index_qbit):
@@ -113,7 +113,7 @@ if __name__ == '__main__':
     inversion_about_mean = create_inversion_about_mean_gate(n)
     
     # psi_0 - applying tensor to zeros qbits
-    psi = apply_n_tensor_to(n, qbit_zero)
+    psi = apply_n_tensor_to(n, qubit_zero)
     print('\npsi_0 - applying tensor to zeros qbits')
     print(psi)
     

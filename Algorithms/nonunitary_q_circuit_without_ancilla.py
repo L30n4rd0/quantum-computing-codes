@@ -6,7 +6,7 @@ Created on May 22, 2018
 
 import numpy as np
 from utils.gates import i, x, y, z, h, f, create_controlled_n_not
-from utils.qbits import qbit_zero, qbit_one
+from utils.qbits import qubit_zero, qubit_one
 from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, printPSI
 from numpy import float, sqrt
 
@@ -148,7 +148,7 @@ def testing_d_gate(n_qbits):
     print('\nd_gate\n', d_gate)
 #     print(np.array(d_gate, dtype = float))
     
-    psi = apply_n_tensor_to(n, qbit_one)
+    psi = apply_n_tensor_to(n, qubit_one)
     print('\ninitial psi')
     printPSI(psi)
     
@@ -163,8 +163,8 @@ def testing_d_gate(n_qbits):
 #     print('\nc_n_a_gate version 1\n', controlled_n_a_gate)
 # #     print(np.array(controlled_n_a_gate, dtype = float))
 #  
-#     psi = apply_tensor(qbit_one, qbit_one)
-#     psi = apply_tensor(psi, qbit_one)
+#     psi = apply_tensor(qubit_one, qubit_one)
+#     psi = apply_tensor(psi, qubit_one)
 #     print('\npsi inicial')
 #     printPSI(psi)
 #      
@@ -179,12 +179,12 @@ def testing_d_gate(n_qbits):
 #     print('\ncontrolled_n_a_gate_with_ancilla\n', controlled_n_a_gate_with_ancilla)
 # #     print(np.array(controlled_n_a_gate, dtype = float))
 #  
-#     psi = apply_tensor(qbit_one, qbit_one)
-#     psi = apply_tensor(psi, qbit_one)
+#     psi = apply_tensor(qubit_one, qubit_one)
+#     psi = apply_tensor(psi, qubit_one)
 #     print('\npsi inicial')
 #     printPSI(psi)
 #      
-#     psi = apply_gate_to_psi(controlled_n_a_gate_with_ancilla, apply_tensor(psi, qbit_zero))
+#     psi = apply_gate_to_psi(controlled_n_a_gate_with_ancilla, apply_tensor(psi, qubit_zero))
 #     print('\napplying controlled_n_a_gate_with_ancilla to psi')
 #     printPSI(psi)
     
@@ -199,8 +199,8 @@ def testing_d_gate(n_qbits):
 #     print('\nc_n_a_gate with ancilla\n', controlled_n_a_gate_with_ancilla)
 # #     print(np.array(controlled_n_a_gate_with_ancilla, dtype = float))
 #      
-#     psi = apply_tensor(qbit_one, qbit_one)
-#     psi = apply_tensor(psi, qbit_one)
+#     psi = apply_tensor(qubit_one, qubit_one)
+#     psi = apply_tensor(psi, qubit_one)
 #     print('\npsi inicial')
 #     printPSI(psi)
 #      
@@ -208,7 +208,7 @@ def testing_d_gate(n_qbits):
 #     print('\napply controlled_n_a_gate to psi')
 #     printPSI(psi_temp)
 #      
-#     psi_temp = apply_gate_to_psi(controlled_n_a_gate_with_ancilla, apply_tensor(psi, qbit_zero))
+#     psi_temp = apply_gate_to_psi(controlled_n_a_gate_with_ancilla, apply_tensor(psi, qubit_zero))
 #     print('\napply controlled_n_a_gate_with_ancilla to psi')
 #     printPSI(psi_temp)
     
