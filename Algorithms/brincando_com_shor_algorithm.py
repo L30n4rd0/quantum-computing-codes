@@ -22,4 +22,6 @@ xs=fastExpModSeq(24,371,526)
 from matplotlib.pyplot import bar
 from numpy import arange
 
+print(xs)
+
 bar(arange(len(xs)), xs, alpha=0.5)

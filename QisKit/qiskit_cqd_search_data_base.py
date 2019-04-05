@@ -1,5 +1,5 @@
 '''
-Created on Sep 27, 2018
+Created on Feb 11, 2019
 
 @author: leonardo
 '''
@@ -13,38 +13,43 @@ from math import pi
 from utils import printDict
 
 # Numbers of registers that will be used in the circuit
-numbers_of_registers = 4
+numbers_of_registers = 3
 
 # Create a Quantum Register with 2 qubits.
 q = QuantumRegister(numbers_of_registers)
+
 # Create a Classical Register with 2 bits.
 c = ClassicalRegister(numbers_of_registers)
+
 # Create a Quantum Circuit
 qc = QuantumCircuit(q, c)
 
-# qc.x(q[0])
-# qc.x(q[2])
+# Add a H gate on qubit 0, putting this qubit in superposition (divider).
+qc.h(q)
+
+# Applying oracle
+# 2 qubits
+# qc.cz(q[1], q[0])
+
+# 3 qubits
+qc.h(q[0])
+qc.ccx(q[2], q[1], q[0])
+qc.h(q[0])
+
+# 4 qubits
+# qc.h(q[0])
+# qc.ccx(q[3], q[2], q[1])
+# qc.ccx(q[2], q[1], q[0])
+# qc.ccx(q[3], q[2], q[1])
+# qc.h(q[0])
 
 
+# Applying controlled_u_1
+qc.z(q[0])
 
+# Add a H gate on qubit 0, putting this qubit in superposition (combiner).
+qc.h(q[0])
 
-qc.ccx(q[3], q[2], q[1])
-qc.x(q[1])
-qc.cx(q[1], q[0])
-qc.x(q[1])
-qc.ccx(q[3], q[2], q[1])
-
-
-
-# # Add a H gate on qubit 1, putting this qubit in superposition.
-# qc.h(q[1])
-#  
-# # Add a CX (CNOT) gate on control qubit 1 and target qubit 0, putting
-# # the qubits in a Bell state.
-# qc.cx(q[1], q[0])
-
-
- 
 # Add a Measure gate to see the state.
 qc.measure(q, c)
 

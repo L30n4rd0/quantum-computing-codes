@@ -17,7 +17,7 @@ qc = QuantumCircuit(q, c)
 qc.h(q[1])
 
 print("Aer.available_backends")
-printList(Aer.available_backends())
+printList(Aer.backends())
 
 # execute the quantum circuit 
 backend = Aer.get_backend('statevector_simulator')

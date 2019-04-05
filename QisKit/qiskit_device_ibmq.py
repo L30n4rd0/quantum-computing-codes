@@ -29,13 +29,43 @@ To store account information locally on disk, uncomment the next line.
 # IBMQ.save_account(QX_TOKEN)
 
 # The next line is mandatory to load the account infos stored
-print("Loading account ...")
+print("\nLoading account ...")
 IBMQ.load_accounts()
 # printDict(IBMQ.stored_accounts()[0])
 
 """
 ########### CREATING THE CIRCUIT ##########
 """
+
+print("\nCreating the circuit ...")
+
+# Numbers of registers that will be used in the circuit
+numbers_of_registers = 2
+
+# Create a Quantum Register with 2 qubits.
+q = QuantumRegister(numbers_of_registers)
+# Create a Classical Register with 2 bits.
+c = ClassicalRegister(numbers_of_registers)
+# Create a Quantum Circuit
+qc = QuantumCircuit(q, c)
+
+# Add a H gate on qubit 0, putting this qubit in superposition (divider).
+qc.h(q)
+
+# Applying oracle
+qc.cz(q[1], q[0])
+
+# Applying controlled_u_1
+qc.z(q[0])
+
+# Add a H gate on qubit 0, putting this qubit in superposition (combiner).
+qc.h(q[0])
+
+# Add a Measure gate to see the state.
+qc.measure(q, c)
+
+
+
 # # Create a Quantum Register with 2 qubits.
 # q = QuantumRegister(2)
 #    
@@ -53,19 +83,24 @@ IBMQ.load_accounts()
 # # Add a Measure gate to see the state.
 # qc.measure(q, c)
 
+
+
 """ 
 See a list of available devices.
 """
-# print("IBMQ backends: ")
+# print("\nIBMQ backends: ")
 # printList(IBMQ.backends())
 
-"""
-####### Compile and run the Quantum circuit on a device backend #########
-""" 
-# print("\nGetting backend ...")
 # List of available devices beckend
-# ibmqx4, ibmqx5, ibmqx2, ibmq_16_melbourne, ibmq_qasm_simulator
-backend_ibmq = IBMQ.get_backend('ibmqx4')
+# ibmqx4
+# ibmq_16_melbourne
+# ibmq_qasm_simulator
+
+"""
+Selecting backend of available devices.
+"""
+print("\nGetting backend ...")
+backend_ibmq = IBMQ.get_backend('ibmq_16_melbourne')
 
 """
 Getting information of the selected backend
@@ -77,18 +112,23 @@ Getting information of the selected backend
 # print("properties: " , backend_ibmq.properties())
 
 """
+####### Compile and run the Quantum circuit on a device backend #########
+""" 
+
+"""
 Getting executed jobs on backend
 """
-print("Getting executed jobs infos ...")
-jobs = backend_ibmq.jobs()
-   
-for job in jobs:
-    print(str(job.job_id()) + " " + 
-          str(job.status()) + " " + 
-          str(job.creation_date()) + " " +
-          str(job.queue_position())
-          )
-# #     
+# print("\nGetting executed jobs infos ...")
+# jobs = backend_ibmq.jobs()
+#      
+# for job in jobs:
+#     print(str(job.job_id()) + " " + 
+#           str(job.status()) + " " + 
+#           str(job.creation_date()) + " " +
+#           str(job.queue_position())
+#           )
+
+
 #     if job.status().name != 'DONE':
 #         print("Canceling the job ...")
 #         job.cancel()
@@ -101,7 +141,12 @@ Canceling job by id
 """
 Retrieving job by id
 """
-# job_ibmq = backend_ibmq.retrieve_job('5c47563e4b2b0a005548270a')
+# job_ibmq = backend_ibmq.retrieve_job('5c63636e5a747200565b2c42')
+
+# Job id: 5c63636e5a747200565b2c42
+# State: 2280 seconds
+# Status: QUEUED
+# Queue position: 817
 
 """
 Compile and run
@@ -114,41 +159,46 @@ Compile and run
 # print("\nRunning ...")
 # job_ibmq = backend_ibmq.run(quantum_object)
 
-# Alternative form to execution
-# job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
+"""
+Alternative form to compile and run (execute)
+"""
+print("\nExecuting ...")
+job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
 
 # print("Go to job monitor")
 # job_monitor(job_ibmq)
 # print("Left of the job monitor")
-# 
-# """
-# Getting execution information
-# """
-# lapse = 0
-# interval = 60
-# while job_ibmq.status().name != 'DONE':
-#     print("\n")
-#     print("Job id: " + job_ibmq.job_id())
-#     print("State: " + str(interval * lapse) + " seconds")
-#     print("Status: " + job_ibmq.status().name)
-#     print("Queue position: " + str( job_ibmq.queue_position() ))
-#     print(".......................................")
-#       
-#     time.sleep(interval)
-#     lapse += 1
-#       
-# print("\nExecution final status: " + job_ibmq.status().name)
-# 
-# """
-# Getting results
-# """
-# result_ibmq = job_ibmq.result()
-#     
-# # Show the results.
-# print("\nRESULTS")
-# print(result_ibmq)
-# 
-# print("\nresult_counts")
-# print(result_ibmq.get_counts())
-# # printDict(result_ibmq)
-
+ 
+"""
+Getting execution information
+"""
+lapse = 0
+interval = 60
+while job_ibmq.status().name != 'DONE':
+    print("\n")
+    print("Job id: " + job_ibmq.job_id())
+    print("State: " + str(interval * lapse) + " seconds")
+    print("Status: " + job_ibmq.status().name)
+    print("Queue position: " + str( job_ibmq.queue_position() ))
+    print(".......................................")
+     
+    if (job_ibmq.queue_position() == 0):
+        break
+         
+    time.sleep(interval)
+    lapse += 1
+         
+print("\nExecution final status: " + job_ibmq.status().name)
+   
+"""
+Getting results
+"""
+result_ibmq = job_ibmq.result()
+       
+# Show the results.
+print("\nRESULTS")
+print(result_ibmq)
+   
+print("\nresult_counts")
+print(result_ibmq.get_counts())
+# printDict(result_ibmq)

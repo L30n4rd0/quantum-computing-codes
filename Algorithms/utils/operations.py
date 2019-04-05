@@ -195,9 +195,9 @@ def printPSI(psi):
     # Qubits number 'n' used on the circuit
     n_size = np.log2(len(psi))
     n_size = int(n_size)
-    
+     
     qubit = 0
-    
+     
     for amplitude in psi:
         print( amplitude[0], '\t|%s> %d' % (np.binary_repr(qubit, n_size), qubit) )
         qubit += 1
