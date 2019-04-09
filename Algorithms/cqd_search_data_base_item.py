@@ -11,7 +11,7 @@ from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi,
 from utils.gates_z import cz_q_1_q_0, cz_q_2_q_0
 from utils.qbits import qubit_one, qubit_zero
 
-def create_gate(n_qbits):
+def create_qwd(n_qbits):
     """
     Description:
         Make a non unitary O gate
@@ -44,9 +44,9 @@ def create_gate(n_qbits):
 if __name__ == '__main__':
 
     # Number of qbits that algorithm will computer
-    n = 2
+    n = 5
 
-    # Item to find: |111....11>
+    # Item to search: |111....11>
     item_to_search = apply_n_tensor_to(n + 1, qubit_one)
 
     item_to_search_projector = np.dot(item_to_search, np.transpose(item_to_search))
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     print('\npsi_0 - Creating tensor product between inputs: |000000>\n')
     printPSI(psi)
 
-    #     print(create_gate(3))
+    #     print(create_qwd(3))
 
     # psi_1 - Applying tensor_h (divider) to psi_0
     psi = apply_gate_to_psi(tensor_h, psi)
