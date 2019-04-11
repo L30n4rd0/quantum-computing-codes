@@ -18,7 +18,7 @@ from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit import execute
 from qiskit import Aer
 
-from utils import printDict, ghz_state, superposition_state
+from utils import print_dict, ghz_state, superposition_state
 
 """
 Build the quantum circuit. We are going to build two circuits a GHZ over 3 qubits 
@@ -50,7 +50,7 @@ print(job.result().get_counts(circuits[1]))
 
 # print(job.result().get_data())
 # job_dict = job.result().get_data()
-# printDict(job_dict)
+# print_dict(job_dict)
 
 plot_histogram(job.result().get_counts(circuits[0]))
 plot_histogram(job.result().get_counts(circuits[1]),options={'number_to_keep': 15})

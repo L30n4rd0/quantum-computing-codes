@@ -9,7 +9,7 @@ import numpy as np
 '''Pauli-identity gate'''
 i = np.identity(2, dtype=complex)
 
-'''Pauli-X gate (= NOT gate)'''
+'''Pauli-X gate (NOT gate)'''
 x = np.array(
     [[0, 1],
      [1, 0]],

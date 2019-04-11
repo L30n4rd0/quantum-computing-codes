@@ -10,7 +10,7 @@ from qiskit import execute, Aer
 from qiskit.tools.visualization import plot_histogram, plot_state_city
 from math import pi
 # from qiskit.qasm import pi
-from utils import printDict
+from utils import print_dict
 
 # Numbers of registers that will be used in the circuit
 numbers_of_registers = 3
@@ -65,7 +65,7 @@ result_sim = job_sim.result()
 print("Simulation status: ", result_sim.status)
 # print(result_sim.get_counts(qc))
 print("get_counts")
-printDict(result_sim.get_counts())
+print_dict(result_sim.get_counts())
 
 # plot_histogram(result_sim.get_counts(), title='Bell-State counts')
 

@@ -5,7 +5,7 @@ Created on Oct 27, 2018
 '''
 
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, execute, Aer
-from utils import printList, overlap, state_2_rho, expectation_value
+from utils import print_list, over_lap, state_2_rho, expectation_value
 from qiskit.tools.visualization import plot_state
 import numpy as np
 
@@ -17,7 +17,7 @@ qc = QuantumCircuit(q, c)
 qc.h(q[1])
 
 print("Aer.available_backends")
-printList(Aer.backends())
+print_list(Aer.backends())
 
 # execute the quantum circuit 
 backend = Aer.get_backend('statevector_simulator')
@@ -25,10 +25,10 @@ job = execute(qc, backend)
 state_superposition = job.result().get_statevector(qc)
 
 print("\nget_statevector")
-printList(state_superposition)
+print_list(state_superposition)
 
 # print("\noverlap")
-# print(overlap(state_superposition, state_superposition))
+# print(over_lap(state_superposition, state_superposition))
 # 
 
 

@@ -7,7 +7,7 @@ Created on Oct 1, 2018
 from qiskit import QuantumCircuit
 import numpy as np
 
-def printDict(dictionary):
+def print_dict(dictionary):
     
     try:
         for item in dictionary.items():
@@ -15,7 +15,7 @@ def printDict(dictionary):
                 item[1].items()
                 print('<<' , item[0] , '>>')
                 
-                printDict(item[1])
+                print_dict(item[1])
                 
                 print('<<' , item[0] , '>>')
             
@@ -26,10 +26,47 @@ def printDict(dictionary):
     except:
         pass
     
-def printList(anyList):
+
+
+def print_list(anyList):
     for item in anyList:
         print(item)
         
+
+
+def list_executed_jobs_on_backend(backend):
+    jobs = backend.jobs()
+         
+    for job in jobs:
+        print(
+            str(job.job_id()) + " " + 
+            str(job.status()) + " " + 
+            str(job.creation_date()) + " " +
+            str(job.queue_position())
+        )
+        
+
+
+def cancel_all_jobs_on_backend(backend):
+    jobs = backend.jobs()
+         
+    for job in jobs:
+        if job.status().name != 'DONE':
+            print("Canceling the job ...")
+            job.cancel()
+        
+
+
+def list_backend_information_status(backend):
+    print("provider: " , backend.provider)
+    print("name: " , backend.name())
+    print("status: " , backend.status())
+    print("configuration: " , backend.configuration())
+    print("properties: " , backend.properties())
+
+
+
+
 def ghz_state(q, c, n):
     # Create a GHZ state
     qc = QuantumCircuit(q, c)
@@ -38,17 +75,25 @@ def ghz_state(q, c, n):
         qc.cx(q[i], q[i+1])
     return qc
 
+
+
 def superposition_state(q, c):
     # Create a Superposition state
     qc = QuantumCircuit(q, c)
     qc.h(q)
     return qc
 
-def overlap(state1, state2):
+
+
+def over_lap(state1, state2):
     return round(np.dot(state1.conj(), state2))
+
+
 
 def state_2_rho(state):
     return np.outer(state, state.conj())
+
+
 
 def expectation_value(state, Operator):
     return round(np.dot(state.conj(), np.dot(Operator, state)).real)

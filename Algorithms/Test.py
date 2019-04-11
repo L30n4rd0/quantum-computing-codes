@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # Tensor 2 Hadamard
     tensor_h = apply_tensor_to_matrices_vector([h, h, h])
     
-    # psi_0 - tensor to qbits|111>
+    # psi_0 - tensor to qbits|001>
     psi = apply_tensor_to_matrices_vector([qubit_zero, qubit_zero, qubit_one])
     
     # psi_1 - applying tensor_h to psi_0

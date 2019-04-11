@@ -5,8 +5,8 @@ Created on 14 de jan de 2018
 '''
 
 import numpy as np
-from builtins import int
 from numpy import sqrt
+import matplotlib.pyplot as plt
 
 def apply_tensor(matrix_a, matrix_b):
     
@@ -206,4 +206,29 @@ def printPSI(psi):
 #     print(temp)
 #     print("unitaria")
 #     print(np.dot(temp, np.transpose(temp)))
+    
+def plotPSI(psi):
+    
+    # Qubits number 'n' used on the circuit
+    n_size = np.log2(len(psi))
+    n_size = int(n_size)
+     
+    states = []
+    probabilities = []
+    
+    for index in range(len(psi)):
+        states.append( str(np.binary_repr(index, n_size)) )
+        probability = psi[index][0] * np.conjugate(psi[index][0])
+        probabilities.append(float(probability))
+        
+    
+    plt.title("Gráfico de probabilidades")
+    plt.xlabel("Estados")
+    plt.ylabel("Probabilidades")
+    
+    plt.bar(states, probabilities)
+    plt.xticks(rotation=70)
+    plt.legend()
+    
+    plt.show()
     
