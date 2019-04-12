@@ -8,6 +8,8 @@ import numpy as np
 from numpy import sqrt
 import matplotlib.pyplot as plt
 
+
+
 def apply_tensor(matrix_a, matrix_b):
     
     """
@@ -70,6 +72,8 @@ def apply_tensor(matrix_a, matrix_b):
     # Returning tensor_result
     return tensor_result
 
+
+
 def apply_n_tensor_to(tensor_number, matrix_u):
     
     """
@@ -104,6 +108,8 @@ def apply_n_tensor_to(tensor_number, matrix_u):
     # Returning tensor result_matrix
     return result_matrix
 
+
+
 def apply_tensor_to_matrices_vector(matrices_vector):
     
     """
@@ -137,7 +143,9 @@ def apply_tensor_to_matrices_vector(matrices_vector):
         
     # Returning tensor result_matrix
     return result_matrix
-    
+
+
+
 def apply_gate_to_psi(matrix_gate, matrix_psi):
     
     """
@@ -166,6 +174,8 @@ def apply_gate_to_psi(matrix_gate, matrix_psi):
     # Returning psi_result
     return psi_result
 
+
+
 def apply_projective_operator(operator, psi):
 
     # operator|psi> = (operator * |psi>) / sqrt(<psi| * operator * |psi>))
@@ -190,22 +200,58 @@ def apply_projective_operator(operator, psi):
     
     return result
 
-def print_psi(psi):
+
+
+def calculate_probabilities(psi):
+    probabilities = []
+    
+    for amplitude in psi:
+        probability = amplitude[0] * np.conjugate(amplitude[0])
+        probabilities.append(probability.real)
+    
+    return probabilities
+    
+
+
+def calculate_binary_values_states(psi):
     
     # Qubits number 'n' used on the circuit
     n_size = np.log2(len(psi))
     n_size = int(n_size)
      
-    qubit = 0
-     
-    for amplitude in psi:
-        print( amplitude[0], '\t|%s> %d' % (np.binary_repr(qubit, n_size), qubit) )
-        qubit += 1
+    states = []
+    
+    for index in range(len(psi)):
+        states.append( str(np.binary_repr(index, n_size)) )
+        
+    return states
+
+
+
+
+def print_psi(psi):
+    
+    states = calculate_binary_values_states(psi)
+    
+    for index in range(len(psi)):
+        print( psi[index][0], '\t|%s> %d' % (states[index], index) )
+    
+    
+    print("Norma:")
+    print_psi_norm(psi)
         
 #     temp = 2 * np.dot(psi, np.transpose(psi)) - np.identity(2**n_size, dtype=complex)
 #     print(temp)
 #     print("unitaria")
 #     print(np.dot(temp, np.transpose(temp)))
+
+
+
+def print_psi_norm(psi):
+    norm = sum(calculate_probabilities(psi))
+    print(norm)
+    
+    
     
 def plot_psi(psi):
     
@@ -213,13 +259,8 @@ def plot_psi(psi):
     n_size = np.log2(len(psi))
     n_size = int(n_size)
      
-    states = []
-    probabilities = []
-    
-    for index in range(len(psi)):
-        states.append( str(np.binary_repr(index, n_size)) )
-        probability = psi[index][0] * np.conjugate(psi[index][0])
-        probabilities.append(float(probability))
+    states = calculate_binary_values_states(psi)
+    probabilities = calculate_probabilities(psi)
         
     
     plt.title("Gráfico de probabilidades")

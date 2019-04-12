@@ -60,7 +60,7 @@ n = 4
 
 
 # Number of items marked on the data base
-m = 2
+m = 5
 
 dim_work = 2**n
 
