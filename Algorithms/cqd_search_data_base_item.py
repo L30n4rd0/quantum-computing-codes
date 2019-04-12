@@ -45,8 +45,8 @@ tensor_h = apply_n_tensor_to(n + 1, h)
 # Creating tensor Identity_Hadamard
 tensor_i_h = apply_tensor(tensor_i, h)
 
-# Creating projective_operator
-projective_operator = apply_tensor(tensor_i, np.dot(qubit_zero, np.transpose(qubit_zero)))
+# Creating projection_operator
+projection_operator = apply_tensor(tensor_i, np.dot(qubit_zero, np.transpose(qubit_zero)))
 
 # psi_0 - Creating tensor product between inputs: |000000>
 psi = apply_n_tensor_to(n + 1, qubit_zero)
@@ -75,11 +75,11 @@ print_psi(psi)
 plot_psi(psi)
 
 # print("Projective")
-# print(projective_operator)
+# print(projection_operator)
 
-# psi_5 - Applying projective_operator to psi_4
-psi = apply_projective_operator(projective_operator, psi)
-print("\npsi_5 - Applying projective_operator to psi\n")
+# psi_5 - Applying projection_operator to psi_4
+psi = apply_projective_operator(projection_operator, psi)
+print("\npsi_5 - Applying projection_operator to psi\n")
 print_psi(psi)
 plot_psi(psi)
     

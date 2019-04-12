@@ -226,9 +226,9 @@ def plot_psi(psi):
     plt.xlabel("Estados")
     plt.ylabel("Probabilidades")
     
-    plt.bar(states, probabilities)
+    plt.bar(states, probabilities, label="Probabilidades")
     plt.xticks(rotation=70)
-    plt.legend()
+#     plt.legend()
     
     plt.show()
     
