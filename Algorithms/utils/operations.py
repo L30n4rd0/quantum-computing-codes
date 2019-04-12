@@ -190,7 +190,7 @@ def apply_projective_operator(operator, psi):
     
     return result
 
-def printPSI(psi):
+def print_psi(psi):
     
     # Qubits number 'n' used on the circuit
     n_size = np.log2(len(psi))
@@ -207,7 +207,7 @@ def printPSI(psi):
 #     print("unitaria")
 #     print(np.dot(temp, np.transpose(temp)))
     
-def plotPSI(psi):
+def plot_psi(psi):
     
     # Qubits number 'n' used on the circuit
     n_size = np.log2(len(psi))

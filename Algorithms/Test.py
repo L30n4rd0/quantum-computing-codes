@@ -7,7 +7,7 @@ Created on 16 de jan de 2018
 import numpy as np
 from utils.gates import i, x, y, z, h, c_not
 from utils.qbits import qubit_zero, qubit_one
-from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, apply_tensor_to_matrices_vector, printPSI
+from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, apply_tensor_to_matrices_vector, print_psi
 
 # Creating gate matrix - Uf Luciano's example
 #     uf_gate_matrix = np.array(
@@ -45,6 +45,6 @@ if __name__ == '__main__':
     psi = apply_gate_to_psi(tensor_h, psi)
     
     # Show psi_1 state
-    printPSI(psi)
+    print_psi(psi)
     
     

@@ -7,7 +7,7 @@ Created on Jun 7, 2018
 import numpy as np
 from utils.gates import i, x, y, z, h, f
 from utils.qbits import qubit_zero, qubit_one
-from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, printPSI
+from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, print_psi
 from numpy import float, sqrt
 
 c = 0.85

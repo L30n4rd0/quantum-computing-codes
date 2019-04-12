@@ -9,7 +9,7 @@ Simulation of the article An N/4 fixed-point duality quantum search algorithm - 
 
 import numpy as np
 from utils.gates import i, z, h
-from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, printPSI, apply_projective_operator, plotPSI
+from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, print_psi, apply_projective_operator, plot_psi
 from utils.qbits import qubit_one, qubit_zero
 
 def create_qwd(n_qbits, m_marked_itens):
@@ -62,7 +62,7 @@ n = 4
 # Number of items marked on the data base
 m = 1
 
-# Item to find: |111....11>
+# Item to search: |111....11>
 item_to_search = apply_n_tensor_to(n, qubit_one)
 
 
@@ -128,25 +128,25 @@ print(projective_operator)
 # psi_0 - Creating tensor product between inputs: |000000>
 psi = apply_n_tensor_to(n + 1, qubit_zero)
 print("\npsi_0 - Creating tensor product between inputs: |000000>\n")
-printPSI(psi)
+print_psi(psi)
      
  
 # psi_1 - Applying tensor_h to psi_0 on work qubits
 psi = apply_gate_to_psi( apply_tensor(tensor_h, i), psi )
 print("\npsi_1 - Applying tensor_h to psi_0 on work qubits\n")
-printPSI(psi)
+print_psi(psi)
     
  
 # psi_2 - Applying oracle to psi_1
 psi = apply_gate_to_psi( apply_tensor(oracle, i), psi )
 print("\npsi_2 - Applying oracle to psi\n")
-printPSI(psi)
+print_psi(psi)
     
     
 # psi_3 - Applying v (qwd) to psi_2
 psi = apply_gate_to_psi( apply_tensor(tensor_i, v), psi )
 print("\npsi_3 - Applying v (qwd) to psi_2\n")
-printPSI(psi)
+print_psi(psi)
 
 
 
@@ -154,14 +154,14 @@ printPSI(psi)
 # psi_4 - Applying controlled_u_0 to psi_3
 psi = apply_gate_to_psi(controlled_u_0, psi)
 print("\npsi_4 - Applying controlled_u_0 to psi_3\n")
-printPSI(psi)
+print_psi(psi)
   
 
  
 # psi_5 - Applying controlled_u_1 to psi_4
 psi = apply_gate_to_psi(controlled_u_1, psi)
 print("\npsi_5 - Applying controlled_u_1 to psi\n")
-printPSI(psi)
+print_psi(psi)
  
 
 
@@ -170,8 +170,8 @@ v = np.conjugate(v)
 v = np.transpose(v)
 psi = apply_gate_to_psi( apply_tensor(tensor_i, v), psi )
 print("\npsi_6 - Applying conjugated transposed of v (qwc) to psi\n")
-printPSI(psi)
-plotPSI(psi)
+print_psi(psi)
+plot_psi(psi)
 
 
 
@@ -182,5 +182,5 @@ plotPSI(psi)
 # psi_5 - Applying projective_operator to psi_4
 psi = apply_projective_operator(projective_operator, psi)
 print("\npsi_5 - Applying projective_operator to psi\n")
-printPSI(psi)
-plotPSI(psi)
+print_psi(psi)
+plot_psi(psi)

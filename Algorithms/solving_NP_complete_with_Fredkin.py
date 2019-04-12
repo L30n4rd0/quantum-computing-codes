@@ -7,7 +7,7 @@ Created on 24 de abr de 2018
 import numpy as np
 from utils.gates import i, x, y, z, h, f
 from utils.qbits import qubit_zero, qubit_one
-from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, printPSI
+from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, print_psi
 
 def create_o_gate(n_qbits):
     """
@@ -53,20 +53,20 @@ if __name__ == '__main__':
     # psi_0 - Creating tensor product between inputs: |000000>
     psi = apply_n_tensor_to(n, qubit_zero)
     print('\npsi_0 - Creating tensor product between inputs: |000000>')
-    printPSI(psi);
+    print_psi(psi);
     
     # psi_1 - Applying tensor_h to psi_0
     psi = apply_gate_to_psi(tensor_h, psi)
     print('\npsi_1 - Applying tensor_h to psi_0')
-    printPSI(psi);
+    print_psi(psi);
     
     # psi_2 - Applying tensor_f to psi_1
     psi = apply_gate_to_psi(tensor_f, psi)
     print('\npsi_2 - Applying tensor_f to psi_2')
-    printPSI(psi);
+    print_psi(psi);
     
     # psi_3 - Applying tensor_o_i to psi_2
     psi = apply_gate_to_psi(tensor_o_i, psi)
     print('\npsi_3 - Applying tensor_o_i to psi_3')
-    printPSI(psi);
+    print_psi(psi);
     
