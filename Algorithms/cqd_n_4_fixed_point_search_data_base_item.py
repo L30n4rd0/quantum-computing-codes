@@ -35,10 +35,12 @@ def create_qwd(n_qbits, m_marked_itens):
     
     if m_marked_itens <= n_data_base_size / 4:
         b = np.sqrt( (n_data_base_size - 4 * m_marked_itens) / (2 * n_data_base_size - 4 * m_marked_itens) )
-    
+        print("entrou no if")
+        
     else:
         b = np.sqrt( (4 * m_marked_itens - n_data_base_size) / (2 * n_data_base_size - 4 * m_marked_itens) )
         b = np.complex(0, b)
+        print("entrou no else")
     
     
     gate_matrix = np.array(
@@ -60,7 +62,7 @@ n = 4
 
 
 # Number of items marked on the data base
-m = 5
+m = 2
 
 dim_work = 2**n
 
@@ -105,7 +107,7 @@ print(v)
   
 # Creating Hadamard"s tensors, works
 tensor_h = apply_n_tensor_to(n, h)
-print("tensor_h")
+print("\ntensor_h")
 print(tensor_h)
  
  
@@ -116,9 +118,10 @@ print(tensor_h)
 # controlled_u_0 = 2 * items_to_search_projector - tensor_i
 controlled_u_0 = apply_tensor(tensor_i, i)
 matrix_size = len(controlled_u_0)
+
 for index in range(matrix_size - 2, matrix_size - 2 - (2 * m), -2):
-    print(index)
     controlled_u_0[index][index] = -1
+    
 print("\ncontrolled_u_0")
 print(controlled_u_0)
   
@@ -186,12 +189,12 @@ v = np.transpose(v)
 psi = apply_gate_to_psi( apply_tensor(tensor_i, v), psi )
 print("\npsi_6 - Applying conjugated transposed of v (qwc) to psi\n")
 print_psi(psi)
-# plot_psi(psi)
+plot_psi(psi)
  
  
  
 # psi_7 - Applying projection_operator to psi_6
-psi = apply_projective_operator(projection_operator, psi)
+psi = apply_gate_to_psi(projection_operator, psi)
 print("\npsi_5 - Applying projection_operator to psi\n")
 print_psi(psi)
 plot_psi(psi)

@@ -9,7 +9,9 @@ from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit import execute, compile, IBMQ, Aer
 from qiskit.tools.monitor import job_monitor
 from Qconfig import APItoken
-from utils import print_dict, print_list
+from utils import print_dict, print_list, list_executed_jobs_on_backend,\
+    list_backend_information_status, cancel_all_jobs_on_backend,\
+    print_job_execution_information
 import time
 
 """
@@ -82,15 +84,13 @@ backend_ibmq = IBMQ.get_backend('ibmqx4')
 """
 Getting information of the selected backend
 """
-# print("provider: " , backend_ibmq.provider)
-# print("name: " , backend_ibmq.name())
-# print("status: " , backend_ibmq.status())
-# print("configuration: " , backend_ibmq.configuration())
-# print("properties: " , backend_ibmq.properties())
+# list_backend_information_status(backend_ibmq)
+
 
 """
 ####### Compile and run the Quantum circuit on a device backend #########
 """ 
+
 
 """
 Compile and run
@@ -103,81 +103,58 @@ Compile and run
 # print("\nRunning ...")
 # job_ibmq = backend_ibmq.run(quantum_object)
 
+
 """
 Alternative form to compile and run (execute)
 """
-print("\nExecuting ...")
-job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
-
-# print("Go to job monitor")
+# print("\nExecuting ...")
+# job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
+# 
+# print("\nGo to job monitor")
 # job_monitor(job_ibmq)
-# print("Left of the job monitor")
+# print("\nLeft of the job monitor")
 
 
 """
 Getting executed jobs on backend
 """
-# print("\nGetting executed jobs infos ...")
-# jobs = backend_ibmq.jobs()
-#      
-# for job in jobs:
-#     print(str(job.job_id()) + " " + 
-#           str(job.status()) + " " + 
-#           str(job.creation_date()) + " " +
-#           str(job.queue_position())
-#           )
+# list_executed_jobs_on_backend(backend_ibmq)
 
 
-#     if job.status().name != 'DONE':
-#         print("Canceling the job ...")
-#         job.cancel()
+"""
+Canceling all jobs on backend
+"""
+# cancel_all_jobs_on_backend(backend_ibmq)
+
 
 """
 Canceling job by id
 """
 # backend_ibmq.retrieve_job('5bd3a2154df859003d31ad0c').cancel()
 
+
 """
 Retrieving job by id
 """
-# job_ibmq = backend_ibmq.retrieve_job('5c63636e5a747200565b2c42')
-
-# Job id: 5c63636e5a747200565b2c42
-# State: 2280 seconds
-# Status: QUEUED
-# Queue position: 817
+job_ibmq = backend_ibmq.retrieve_job('5cb4ab74a5d9170065d419d8')
 
  
 """
 Getting execution information
 """
-lapse = 0
-interval = 60
-while job_ibmq.status().name != 'DONE':
-    print("\n")
-    print("Job id: " + job_ibmq.job_id())
-    print("State: " + str(interval * lapse) + " seconds")
-    print("Status: " + job_ibmq.status().name)
-    print("Queue position: " + str( job_ibmq.queue_position() ))
-    print(".......................................")
-     
-    if (job_ibmq.queue_position() == 0):
-        break
-         
-    time.sleep(interval)
-    lapse += 1
-         
-print("\nExecution final status: " + job_ibmq.status().name)
+print_job_execution_information(job_ibmq)
+
    
 """
 Getting results
 """
 result_ibmq = job_ibmq.result()
-       
+        
 # Show the results.
 print("\nRESULTS")
 print(result_ibmq)
-   
+    
 print("\nresult_counts")
 print(result_ibmq.get_counts())
 # print_dict(result_ibmq)
+

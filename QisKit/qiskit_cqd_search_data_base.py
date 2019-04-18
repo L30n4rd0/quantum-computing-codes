@@ -67,5 +67,5 @@ print("Simulation status: ", result_sim.status)
 print("get_counts")
 print_dict(result_sim.get_counts())
 
-# plot_histogram(result_sim.get_counts(), title='Bell-State counts')
+plot_histogram(result_sim.get_counts(), title='Bell-State counts')
 
