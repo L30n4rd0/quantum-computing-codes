@@ -3,7 +3,8 @@ Created on 4 de out de 2017
 
 @author: leonardo
 '''
-from click._compat import raw_input
+
+
 
 class DeterminantCalculator(object):
     '''
@@ -83,15 +84,22 @@ class DeterminantCalculator(object):
         Return: matrix filled
         '''
         
-        matrix_dimension = int( raw_input("Digite a dimensao da matrix: ") )
+        matrix_dimension = int( input("Digite a dimensao da matrix: ") )
         
         matrix = [[0 for x in range(matrix_dimension)] for y in range(matrix_dimension)]
         
         for index in range(matrix_dimension):
-            matrix_row = raw_input("Digite os valores da linha %d da matriz separados por espaco:\nExemplo: 7 2 3\n" % (index +1))
-            matrix[index] = map(int, matrix_row.split(' '))
+            matrix_row = input("Digite os valores da linha %d da matriz separados por espaco:\nExemplo: 7 2 3\n" % (index +1))
+            matrix_row = matrix_row.split(' ') # Create a list with string items
+            matrix_row = map(int, matrix_row) # Create a map and convert items to int
+            matrix_row = list(matrix_row) # Convert map to list
+            matrix[index] = matrix_row # Add the new row to matrix
             
         return matrix;
+
+
+
+
     
 calculator = DeterminantCalculator()
 
@@ -102,3 +110,4 @@ print ("Matriz inserida")
 calculator.printMatrix(matrix)
 
 print ("\nDeterminante: ", determinant)
+
