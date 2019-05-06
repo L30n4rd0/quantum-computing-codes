@@ -7,10 +7,10 @@ Created on Feb 11, 2019
 # Import the Qiskit SDK
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit import execute, Aer
-from qiskit.tools.visualization import plot_histogram, plot_state_city
-from math import pi
-# from qiskit.qasm import pi
+from qiskit.tools.visualization import plot_histogram
 from utils import print_dict
+
+
 
 # Numbers of registers that will be used in the circuit
 numbers_of_registers = 3
@@ -53,6 +53,8 @@ qc.h(q[0])
 # Add a Measure gate to see the state.
 qc.measure(q, c)
 
+
+
 # See a list of available local simulators
 # print("Aer backends: ", Aer.backends())
 
@@ -61,11 +63,14 @@ backend_sim = Aer.get_backend('qasm_simulator')
 job_sim = execute(qc, backend_sim)
 result_sim = job_sim.result()
 
+
+
 # Show the results
 print("Simulation status: ", result_sim.status)
 # print(result_sim.get_counts(qc))
 print("get_counts")
 print_dict(result_sim.get_counts())
 
-plot_histogram(result_sim.get_counts(), title='Bell-State counts')
+
+plot_histogram(result_sim.get_counts(), title='Histogram')
 
