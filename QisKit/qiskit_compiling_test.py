@@ -63,7 +63,7 @@ def generate_circuit_one_qubit(unitary_matrix_2x2):
 # generate_circuit_two_qubits(matrix)
 
 
-
+# Divider to 3 qubit of works on algorithm n 4 fixed point search
 matrix = np.array(
     [[0.81649658+0.j,  0.57735027+0.j],
      [0.57735027+0.j, -0.81649658+0.j]],

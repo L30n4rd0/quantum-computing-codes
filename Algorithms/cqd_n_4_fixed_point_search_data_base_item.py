@@ -27,6 +27,8 @@ def create_qwd(n_qbits, m_marked_itens):
     Example:
 
     """
+    # só para testar com dois 2 bits de trabalho
+    n_qbits = n_qbits + 1
     
     n_data_base_size = 2 ** n_qbits
     
@@ -58,11 +60,11 @@ def create_qwd(n_qbits, m_marked_itens):
 
 
 # Number of work qbits that algorithm will compute
-n = 4
+n = 2
 
 
 # Number of items marked on the data base
-m = 2
+m = 1
 
 dim_work = 2**n
 
@@ -83,7 +85,7 @@ items_to_search_projector = np.zeros((dim_work, dim_work), dtype=complex)
 for index in range(dim_work - 1, dim_work - 1 - m, -1):
     items_to_search_projector[index][index] = 1
 print("\nitems_to_search_projector")
-print(items_to_search_projector)
+print(items_to_search_projector.real)
 
 
 # Creating Identity"s tensors to work qubits
@@ -95,7 +97,7 @@ tensor_i = np.identity(2**n, dtype=complex)
 # u_t = I - 2 * items_to_search_projector
 oracle = tensor_i - (2 * items_to_search_projector)
 print("\noraculo")
-print(oracle)
+print(oracle.real)
  
  
 # Creating qwd. On the article it is defined as
@@ -108,7 +110,7 @@ print(v)
 # Creating Hadamard"s tensors, works
 tensor_h = apply_n_tensor_to(n, h)
 print("\ntensor_h")
-print(tensor_h)
+print(tensor_h.real)
  
  
  
@@ -123,7 +125,7 @@ for index in range(matrix_size - 2, matrix_size - 2 - (2 * m), -2):
     controlled_u_0[index][index] = -1
     
 print("\ncontrolled_u_0")
-print(controlled_u_0)
+print(controlled_u_0.real)
   
  
  
@@ -131,7 +133,7 @@ print(controlled_u_0)
 # Creating controled_u_1 - invert all sings
 controlled_u_1 = apply_tensor(tensor_i, z)
 print("\ncontrolled_u_1")
-print(controlled_u_1)
+print(controlled_u_1.real)
    
    
  
@@ -139,7 +141,7 @@ print(controlled_u_1)
 zero_projection_operator = np.dot(qubit_zero, np.transpose(qubit_zero))
 projection_operator = apply_tensor( tensor_i, zero_projection_operator )
 print("\nprojection_operator")
-print(projection_operator)
+print(projection_operator.real)
 
    
  
