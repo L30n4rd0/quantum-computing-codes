@@ -102,19 +102,19 @@ Getting execution information
 print_job_execution_information(job_ibmq)
 
 
-"""
-Getting results
-"""
-print("\nGo to job result")
-result_ibmq = job_ibmq.result()
-   
-# Show the results.
-print("\nRESULTS")
-print(result_ibmq)
-         
-print("\nresult_counts")
-print(result_ibmq.get_counts())
- 
-print("\n")
-print_dict(result_ibmq.get_counts())
+# """
+# Getting results
+# """
+# print("\nGo to job result")
+# result_ibmq = job_ibmq.result()
+#    
+# # Show the results.
+# print("\nRESULTS")
+# print(result_ibmq)
+#          
+# print("\nresult_counts")
+# print(result_ibmq.get_counts())
+#  
+# print("\n")
+# print_dict(result_ibmq.get_counts())
 

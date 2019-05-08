@@ -39,7 +39,8 @@ def print_list(anyList):
 def print_job_execution_information(job):
     lapse = 0
     interval = 60
-    while job.status().name != 'DONE':
+    
+    while True:
         print("\n")
         print("Job id: " + job.job_id())
         print("State: " + str(interval * lapse) + " seconds")
@@ -47,13 +48,31 @@ def print_job_execution_information(job):
         print("Queue position: " + str( job.queue_position() ))
         print(".......................................")
            
-        if (job.queue_position() == 0):
-            break
+#         if (job.queue_position() == 0):
+#             break
                
         time.sleep(interval)
         lapse += 1
+        
+        if job.status().name == 'DONE':
+            break
                
     print("\nExecution final status: " + job.status().name)
+    
+    """
+    Getting results
+    """
+    result_ibmq = job.result()
+        
+    # Show the results.
+    print("\nRESULTS")
+    print(result_ibmq)
+              
+    print("\nResult_counts")
+    print(result_ibmq.get_counts())
+      
+    print("\n")
+    print_dict(result_ibmq.get_counts())
 
 
 
