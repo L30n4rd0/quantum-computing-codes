@@ -28,7 +28,7 @@ def create_qwd(n_qbits, m_marked_itens):
 
     """
     # só para testar com dois 2 bits de trabalho
-    n_qbits = n_qbits + 1
+#     n_qbits = n_qbits + 1
     
     n_data_base_size = 2 ** n_qbits
     
@@ -60,7 +60,7 @@ def create_qwd(n_qbits, m_marked_itens):
 
 
 # Number of work qbits that algorithm will compute
-n = 2
+n = 3
 
 
 # Number of items marked on the data base

@@ -19,7 +19,7 @@ from qiskit import Aer
 
 backend = Aer.get_backend('unitary_simulator')
 
-q = QuantumRegister(1)
+q = QuantumRegister(4)
 # q[4]
 # q[3]
 # q[2]
@@ -102,7 +102,7 @@ qc = QuantumCircuit(q)
 
 
 
-qc.u3(1.2309594197353562, 2.220446049250313e-16, 3.141592653589793, q[0])
+# qc.u3(1.2309594197353562, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 
 # c_3_x
@@ -116,9 +116,9 @@ qc.u3(1.2309594197353562, 2.220446049250313e-16, 3.141592653589793, q[0])
 # qc.cz(q[1], q[0])
 
 # ccz
-# qc.h(q[0])
-# qc.ccx(q[2], q[1], q[0])
-# qc.h(q[0])
+qc.h(q[0])
+qc.ccx(q[2], q[1], q[0])
+qc.h(q[0])
 
 # c_3_z
 # qc.h(q[0])
@@ -190,8 +190,10 @@ qc.u3(1.2309594197353562, 2.220446049250313e-16, 3.141592653589793, q[0])
 job = execute(qc, backend)
 final_matrix = job.result().get_unitary(qc, decimals=3)
 print("Complex")
-print(final_matrix)
+for row in final_matrix:
+    print(row)
 
 print("Real")
-print(final_matrix.real)
+for row in final_matrix:
+    print(row.real)
 

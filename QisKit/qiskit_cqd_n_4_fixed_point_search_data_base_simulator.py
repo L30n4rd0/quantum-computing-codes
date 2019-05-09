@@ -13,7 +13,7 @@ from utils import print_dict
 
 
 # Numbers of registers that will be used in the circuit
-numbers_of_registers = 3
+numbers_of_registers = 4
 
 # Create a Quantum Register with 2 qubits.
 q = QuantumRegister(numbers_of_registers)
@@ -25,6 +25,7 @@ c = ClassicalRegister(numbers_of_registers)
 qc = QuantumCircuit(q, c)
 
 # Add a H gate on qubit 2 and 1, putting qubits work in superposition
+qc.h(q[3])
 qc.h(q[2])
 qc.h(q[1])
 
