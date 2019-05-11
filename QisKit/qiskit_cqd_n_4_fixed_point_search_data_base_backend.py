@@ -44,17 +44,18 @@ IBMQ.load_accounts()
 
 print("\nCreating the circuit ...")
 
-# Numbers of registers that will be used in the circuit
-numbers_of_registers = 3
+# Numbers of qubits that will be used in the circuit
+numbers_of_qubits = 4
 
-# Create a Quantum Register with 2 qubits.
-q = QuantumRegister(numbers_of_registers)
-# Create a Classical Register with 2 bits.
-c = ClassicalRegister(numbers_of_registers)
+# Create a Quantum Register with n qubits.
+q = QuantumRegister(numbers_of_qubits)
+# Create a Classical Register with n bits.
+c = ClassicalRegister(numbers_of_qubits)
 # Create a Quantum Circuit
 qc = QuantumCircuit(q, c)
 
 # Add a H gate on qubit 2 and 1, putting qubits work in superposition
+qc.h(q[3])
 qc.h(q[2])
 qc.h(q[1])
 
@@ -81,7 +82,7 @@ qc.measure(q, c)
 Selecting backend of available devices.
 """
 print("\nGetting backend ...")
-backend_ibmq = IBMQ.get_backend('ibmqx2')
+backend_ibmq = IBMQ.get_backend('ibmqx4')
 
 
 
@@ -89,7 +90,7 @@ backend_ibmq = IBMQ.get_backend('ibmqx2')
 ####### Compile and run the Quantum circuit on a device backend #########
 """ 
 print("\nExecuting ...")
-job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
+job_ibmq = execute(qc, backend=backend_ibmq, shots=2 * 1024)
 
 # print("\nGo to job monitor")
 # job_monitor(job_ibmq)
@@ -100,21 +101,4 @@ job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
 Getting execution information
 """
 print_job_execution_information(job_ibmq)
-
-
-# """
-# Getting results
-# """
-# print("\nGo to job result")
-# result_ibmq = job_ibmq.result()
-#    
-# # Show the results.
-# print("\nRESULTS")
-# print(result_ibmq)
-#          
-# print("\nresult_counts")
-# print(result_ibmq.get_counts())
-#  
-# print("\n")
-# print_dict(result_ibmq.get_counts())
 

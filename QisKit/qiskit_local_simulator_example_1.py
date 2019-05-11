@@ -10,13 +10,13 @@ from qiskit import execute, Aer
 from qiskit.tools.visualization import plot_histogram, plot_state_city
 from utils import print_dict
 
-# Numbers of registers that will be used in the circuit
-numbers_of_registers = 2
+# Numbers of qubits that will be used in the circuit
+numbers_of_qubits = 2
 
-# Create a Quantum Register with 2 qubits.
-q = QuantumRegister(numbers_of_registers)
-# Create a Classical Register with 2 bits.
-c = ClassicalRegister(numbers_of_registers)
+# Create a Quantum Register with n qubits.
+q = QuantumRegister(numbers_of_qubits)
+# Create a Classical Register with n bits.
+c = ClassicalRegister(numbers_of_qubits)
 # Create a Quantum Circuit
 qc = QuantumCircuit(q, c)
 

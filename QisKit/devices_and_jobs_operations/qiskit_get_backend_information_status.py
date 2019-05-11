@@ -55,7 +55,7 @@ See a list of available devices.
 Selecting backend of available devices.
 """
 print("\nGetting backend ...")
-backend_ibmq = IBMQ.get_backend('ibmqx2')
+backend_ibmq = IBMQ.get_backend('ibmqx4')
 
 
 

@@ -18,7 +18,7 @@ def create_qwd(n_qbits, m_marked_itens):
         Make a quantum wave divider gate as specified on
         equation 22 in the article
     Required Params:
-        n_qbits: Number of qbits that algorithm will computer
+        n_qbits: Number of work qbits that algorithm will computer
         m_marked_itens: Number of items marked on the data base
     Optional Params:
         None
@@ -37,12 +37,12 @@ def create_qwd(n_qbits, m_marked_itens):
     
     if m_marked_itens <= n_data_base_size / 4:
         b = np.sqrt( (n_data_base_size - 4 * m_marked_itens) / (2 * n_data_base_size - 4 * m_marked_itens) )
-        print("entrou no if")
+        print("\nunitary v operator")
         
     else:
         b = np.sqrt( (4 * m_marked_itens - n_data_base_size) / (2 * n_data_base_size - 4 * m_marked_itens) )
         b = np.complex(0, b)
-        print("entrou no else")
+        print("\nnon unitary v operator")
     
     
     gate_matrix = np.array(
@@ -96,14 +96,14 @@ tensor_i = np.identity(2**n, dtype=complex)
 # On the article, in step 1, the oracle is defined as:
 # u_t = I - 2 * items_to_search_projector
 oracle = tensor_i - (2 * items_to_search_projector)
-print("\noraculo")
+print("\noracle")
 print(oracle.real)
  
  
 # Creating qwd. On the article it is defined as
 # v in step 2
 v = create_qwd(n, m)
-print("\nv")
+print("\nv operator")
 print(v)
  
   
