@@ -7,7 +7,7 @@ Created on Oct 2, 2018
 # Import Qiskit Terra
 from qiskit import IBMQ
 from Qconfig import APItoken
-from utils import list_backend_information_status
+from utils import list_backend_information_status, print_list
 
 
 
@@ -41,8 +41,8 @@ IBMQ.load_accounts()
 """ 
 See a list of available devices.
 """
-# print("\nIBMQ backends: ")
-# print_list(IBMQ.backends())
+print("\nAvailables IBMQ backends: ")
+print_list(IBMQ.backends())
 
 # List of available devices beckend
 # ibmqx4
@@ -52,7 +52,7 @@ See a list of available devices.
 
 
 """
-Selecting backend of available devices.
+Selecting a backend of availables devices.
 """
 print("\nGetting backend ...")
 backend_ibmq = IBMQ.get_backend('ibmqx4')
