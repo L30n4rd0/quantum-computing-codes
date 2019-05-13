@@ -82,7 +82,7 @@ qc.measure(q, c)
 Selecting backend of available devices.
 """
 print("\nGetting backend ...")
-backend_ibmq = IBMQ.get_backend('ibmq_qasm_simulator')
+backend_ibmq = IBMQ.get_backend('ibmqx4')
 
 
 
@@ -90,7 +90,7 @@ backend_ibmq = IBMQ.get_backend('ibmq_qasm_simulator')
 ####### Compile and run the Quantum circuit on a device backend #########
 """ 
 print("\nExecuting ...")
-job_ibmq = execute(qc, backend=backend_ibmq, shots=2 * 1024)
+job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
 
 # print("\nGo to job monitor")
 # job_monitor(job_ibmq)
