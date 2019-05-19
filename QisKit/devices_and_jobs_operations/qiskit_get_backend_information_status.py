@@ -55,7 +55,7 @@ print_list(IBMQ.backends())
 Selecting a backend of availables devices.
 """
 print("\nGetting backend ...")
-backend_ibmq = IBMQ.get_backend('ibmq_16_melbourne')
+backend_ibmq = IBMQ.get_backend('ibmq_qasm_simulator')
 
 
 
