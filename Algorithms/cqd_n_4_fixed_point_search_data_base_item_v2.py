@@ -8,56 +8,9 @@ Simulation of the article An N/4 fixed-point duality quantum search algorithm - 
 
 
 import numpy as np
-from utils.gates import i, z, h
+from utils.gates import i, z, h, create_n_4_qwd_gate
 from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, print_psi, apply_projective_operator, plot_psi
 from utils.qbits import qubit_one, qubit_zero
-
-def create_qwd(n_qbits, m_marked_itens):
-    """
-    Description:
-        Make a quantum wave divider gate as specified on
-        equation 22 in the article
-    Required Params:
-        n_qbits: Number of work qbits that algorithm will computer
-        m_marked_itens: Number of items marked on the data base
-    Optional Params:
-        None
-    Return Value:
-        A quantum wave divider gate
-    Example:
-
-    """
-    # só para testar com dois 2 bits de trabalho
-#     n_qbits = n_qbits + 1
-#     m_marked_itens = m_marked_itens + 1
-    
-    n_data_base_size = 2 ** n_qbits
-    
-    a = np.sqrt( n_data_base_size / (2 * n_data_base_size - 4 * m_marked_itens) )
-    b = None
-    
-    if m_marked_itens <= n_data_base_size / 4:
-        b = np.sqrt( (n_data_base_size - 4 * m_marked_itens) / (2 * n_data_base_size - 4 * m_marked_itens) )
-        print("\nunitary v operator")
-        
-    else:
-        b = np.sqrt( (4 * m_marked_itens - n_data_base_size) / (2 * n_data_base_size - 4 * m_marked_itens) )
-        b = np.complex(0, b)
-        print("\nnon unitary v operator")
-    
-    
-    gate_matrix = np.array(
-        [[a, b],
-         [b, -a]],
-        dtype=complex
-    )
-    
-
-    # Returning gate_matrix
-    return gate_matrix
-
-
-
 
 
 # Number of work qbits that algorithm will compute
@@ -103,7 +56,7 @@ tensor_i = np.identity(2**n, dtype=complex)
  
 # Creating qwd. On the article it is defined as
 # v in step 2
-v = create_qwd(n, m)
+v = create_n_4_qwd_gate(n, m)
 print("\nv operator")
 print(v)
  
