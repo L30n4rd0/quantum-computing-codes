@@ -140,3 +140,48 @@ def state_2_rho(state):
 def expectation_value(state, Operator):
     return round(np.dot(state.conj(), np.dot(Operator, state)).real)
 
+
+
+def create_n_4_qwd_gate(n_qbits, m_marked_itens):
+    """
+    Description:
+        Make a quantum wave divider gate as specified on
+        equation 22 in the article
+        An N/4 fixed-point duality quantum search algorithm - HAO Liang et al - 2010
+    Required Params:
+        n_qbits: Number of work qbits that algorithm will computer
+        m_marked_itens: Number of items marked on the data base
+    Optional Params:
+        None
+    Return Value:
+        A quantum wave divider gate
+    Example:
+
+    """
+    # só para testar com dois 2 bits de trabalho
+#     n_qbits = n_qbits + 1
+    
+    n_data_base_size = 2 ** n_qbits
+    
+    a = np.sqrt( n_data_base_size / (2 * n_data_base_size - 4 * m_marked_itens) )
+    b = None
+    
+    if m_marked_itens <= n_data_base_size / 4:
+        b = np.sqrt( (n_data_base_size - 4 * m_marked_itens) / (2 * n_data_base_size - 4 * m_marked_itens) )
+        print("\nunitary v operator")
+        
+    else:
+        b = np.sqrt( (4 * m_marked_itens - n_data_base_size) / (2 * n_data_base_size - 4 * m_marked_itens) )
+        b = np.complex(0, b)
+        print("\nnon unitary v operator")
+    
+    
+    gate_matrix = np.array(
+        [[a, b],
+         [b, -a]],
+        dtype=complex
+    )
+    
+
+    # Returning gate_matrix
+    return gate_matrix

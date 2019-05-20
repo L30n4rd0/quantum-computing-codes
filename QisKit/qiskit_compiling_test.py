@@ -5,7 +5,7 @@ Created on Apr 12, 2019
 '''
 import numpy as np
 from qiskit.mapper._compiling import two_qubit_kak, euler_angles_1q
-from utils import print_list
+from utils import print_list, create_n_4_qwd_gate
 
 def generate_circuit_two_qubits(unitary_matrix_4x4):
     
@@ -64,11 +64,17 @@ def generate_circuit_one_qubit(unitary_matrix_2x2):
 
 
 # Divider to 3 qubit of works on algorithm n 4 fixed point search
-matrix = np.array(
-    [[0.81649658+0.j,  0.57735027+0.j],
-     [0.57735027+0.j, -0.81649658+0.j]],
-    dtype=complex
-)
- 
+# matrix = np.array(
+#     [[0.81649658+0.j,  0.57735027+0.j],
+#      [0.57735027+0.j, -0.81649658+0.j]],
+#     dtype=complex
+# )
+
+matrix = create_n_4_qwd_gate(n_qbits=4, m_marked_itens=3)
+
+print("\nGenerated matrix")
+print(matrix)
+
+print("\nGenerated circuit gate")
 generate_circuit_one_qubit(matrix)
 

@@ -19,7 +19,7 @@ from qiskit import Aer
 
 backend = Aer.get_backend('unitary_simulator')
 
-q = QuantumRegister(4)
+q = QuantumRegister(1)
 # q[4]
 # q[3]
 # q[2]
@@ -101,6 +101,7 @@ qc = QuantumCircuit(q)
 # qc.u3(0.0, 0.0, 1.5707963267948966, q[0])
 
 
+qc.u3(0.9272952180016123, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 # qc.u3(1.2309594197353562, 2.220446049250313e-16, 3.141592653589793, q[0])
 
@@ -116,9 +117,9 @@ qc = QuantumCircuit(q)
 # qc.cz(q[1], q[0])
 
 # ccz
-qc.h(q[0])
-qc.ccx(q[2], q[1], q[0])
-qc.h(q[0])
+# qc.h(q[0])
+# qc.ccx(q[2], q[1], q[0])
+# qc.h(q[0])
 
 # c_3_z
 # qc.h(q[0])
