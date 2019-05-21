@@ -45,24 +45,34 @@ IBMQ.load_accounts()
 print("\nCreating the circuit ...")
 
 # Numbers of qubits that will be used in the circuit
-numbers_of_qubits = 4
+numbers_of_qubits = 5
 
 # Create a Quantum Register with n qubits.
 q = QuantumRegister(numbers_of_qubits)
+
 # Create a Classical Register with n bits.
 c = ClassicalRegister(numbers_of_qubits)
+
 # Create a Quantum Circuit
 qc = QuantumCircuit(q, c)
 
 # Add a H gate on qubit 2 and 1, putting qubits work in superposition
+qc.h(q[4])
 qc.h(q[3])
 qc.h(q[2])
 qc.h(q[1])
 
 # Add divider gate on qubit 0
-qc.u3(1.2309594197353562, 2.220446049250313e-16, 3.141592653589793, q[0])
+
+# qwd gate to n_qbits=3, m_marked_itens=1
+# qc.u3(1.2309594173407747, 2.220446049250313e-16, 3.141592653589793, q[0])
+
+# qwd gate to n_qbits=4, m_marked_itens=3
+qc.u3(0.9272952180016123, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 # Applying oracle
+
+# 3 qubits
 qc.h(q[0])
 qc.ccx(q[2], q[1], q[0])
 qc.h(q[0])
@@ -71,7 +81,12 @@ qc.h(q[0])
 qc.z(q[0])
 
 # Add combiner gate on qubit 0
-qc.u3(1.2309594197353562, 2.220446049250313e-16, 3.141592653589793, q[0])
+
+# qwc gate to n_qbits=3, m_marked_itens=1
+# qc.u3(1.2309594173407747, 2.220446049250313e-16, 3.141592653589793, q[0])
+
+# qwc gate to n_qbits=4, m_marked_itens=3
+qc.u3(0.9272952180016123, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 # Add a Measure gate to see the state.
 qc.measure(q, c)
