@@ -45,7 +45,7 @@ IBMQ.load_accounts()
 print("\nCreating the circuit ...")
 
 # Numbers of qubits that will be used in the circuit
-numbers_of_qubits = 5
+numbers_of_qubits = 4
 
 # Create a Quantum Register with n qubits.
 q = QuantumRegister(numbers_of_qubits)
@@ -56,8 +56,8 @@ c = ClassicalRegister(numbers_of_qubits)
 # Create a Quantum Circuit
 qc = QuantumCircuit(q, c)
 
-# Add a H gate on qubit 2 and 1, putting qubits work in superposition
-qc.h(q[4])
+# Add a H gate on qubit 2 and 1, putting work qubits in superposition
+# qc.h(q[4])
 qc.h(q[3])
 qc.h(q[2])
 qc.h(q[1])
@@ -65,10 +65,10 @@ qc.h(q[1])
 # Add divider gate on qubit 0
 
 # qwd gate to n_qbits=3, m_marked_itens=1
-# qc.u3(1.2309594173407747, 2.220446049250313e-16, 3.141592653589793, q[0])
+qc.u3(1.2309594173407747, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 # qwd gate to n_qbits=4, m_marked_itens=3
-qc.u3(0.9272952180016123, 2.220446049250313e-16, 3.141592653589793, q[0])
+# qc.u3(0.9272952180016123, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 # Applying oracle
 
@@ -83,10 +83,10 @@ qc.z(q[0])
 # Add combiner gate on qubit 0
 
 # qwc gate to n_qbits=3, m_marked_itens=1
-# qc.u3(1.2309594173407747, 2.220446049250313e-16, 3.141592653589793, q[0])
+qc.u3(1.2309594173407747, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 # qwc gate to n_qbits=4, m_marked_itens=3
-qc.u3(0.9272952180016123, 2.220446049250313e-16, 3.141592653589793, q[0])
+# qc.u3(0.9272952180016123, 2.220446049250313e-16, 3.141592653589793, q[0])
 
 # Add a Measure gate to see the state.
 qc.measure(q, c)
@@ -97,7 +97,7 @@ qc.measure(q, c)
 Selecting backend of available devices.
 """
 print("\nGetting backend ...")
-backend_ibmq = IBMQ.get_backend('ibmq_qasm_simulator')
+backend_ibmq = IBMQ.get_backend('ibmq_16_melbourne')
 
 
 
@@ -105,7 +105,7 @@ backend_ibmq = IBMQ.get_backend('ibmq_qasm_simulator')
 ####### Compile and run the Quantum circuit on a device backend #########
 """ 
 print("\nExecuting ...")
-job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
+job_ibmq = execute(qc, backend=backend_ibmq, shots=8*1024)
 
 # print("\nGo to job monitor")
 # job_monitor(job_ibmq)
