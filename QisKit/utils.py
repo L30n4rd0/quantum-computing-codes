@@ -7,6 +7,7 @@ Created on Oct 1, 2018
 from qiskit import QuantumCircuit
 import numpy as np
 import time
+from qiskit.providers.aer.aerjob import AerJob
 
 def print_dict(dictionary):
     
@@ -38,24 +39,31 @@ def print_list(anyList):
 
 def print_job_execution_information(job):
     lapse = 0
-    interval = 60
+    if isinstance(job, AerJob):
+        interval = 2
+    else:
+        interval = 60
     
     while True:
         print("\n")
         print("Job id: " + job.job_id())
         print("State: " + str(interval * lapse) + " seconds")
         print("Status: " + job.status().name)
-        print("Queue position: " + str( job.queue_position() ))
+        
+        if not isinstance(job, AerJob):
+            print("Queue position: " + str( job.queue_position() ))
+        
         print(".......................................")
            
 #         if (job.queue_position() == 0):
 #             break
+
+        if job.status().name == 'DONE':
+            break
                
         time.sleep(interval)
         lapse += 1
         
-        if job.status().name == 'DONE':
-            break
                
     print("\nExecution final status: " + job.status().name)
     
@@ -69,9 +77,10 @@ def print_job_execution_information(job):
     print(result_ibmq)
               
     print("\nResult_counts")
+    print("\nDict in line")
     print(result_ibmq.get_counts())
       
-    print("\n")
+    print("\nDict in column")
     print_dict(result_ibmq.get_counts())
 
 

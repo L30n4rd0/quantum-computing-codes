@@ -9,7 +9,8 @@ from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit import execute, IBMQ
 from qiskit.tools.monitor import job_monitor
 from Qconfig import APItoken
-from utils import print_dict, print_job_execution_information
+from utils import print_job_execution_information
+from numpy import pi
 
 
 
@@ -45,22 +46,44 @@ IBMQ.load_accounts()
 print("\nCreating the circuit ...")
 
 # Numbers of qubits that will be used in the circuit
-numbers_of_qubits = 3
+numbers_of_qubits = 4
 
 # Create a Quantum Register with n qubits.
 q = QuantumRegister(numbers_of_qubits)
+
 # Create a Classical Register with n bits.
 c = ClassicalRegister(numbers_of_qubits)
+
 # Create a Quantum Circuit
 qc = QuantumCircuit(q, c)
 
-# Add a H gate on all qubits, putting in superposition (divider).
+# Add a H gate on qubit 0, putting this qubit in superposition (divider).
 qc.h(q)
 
-# Applying oracle
-qc.h(q[0])
-qc.ccx(q[2], q[1], q[0])
-qc.h(q[0])
+# Applying oracle on the down slit (auxiliary qubit equals to 1)
+# 2 qubits
+# qc.cz(q[1], q[0])
+
+# 3 qubits
+# qc.h(q[0])
+# qc.ccx(q[2], q[1], q[0])
+# qc.h(q[0])
+
+# 4 qubits
+qc.cu1(pi/4, q[3], q[0])
+qc.cx(q[3], q[2])
+qc.cu1(-pi/4, q[2], q[0])
+qc.cx(q[3], q[2])
+qc.cu1(pi/4, q[2], q[0])
+qc.cx(q[2], q[1])
+qc.cu1(-pi/4, q[1], q[0])
+qc.cx(q[3], q[1])
+qc.cu1(pi/4, q[1], q[0])
+qc.cx(q[2], q[1])
+qc.cu1(-pi/4, q[1], q[0])
+qc.cx(q[3], q[1])
+qc.cu1(pi/4, q[1], q[0])
+
 
 # Applying controlled_u_1
 qc.z(q[0])
@@ -77,7 +100,7 @@ qc.measure(q, c)
 Selecting backend of available devices.
 """
 print("\nGetting backend ...")
-backend_ibmq = IBMQ.get_backend('ibmq_qasm_simulator')
+backend_ibmq = IBMQ.get_backend('ibmqx4')
 
 
 
@@ -85,7 +108,7 @@ backend_ibmq = IBMQ.get_backend('ibmq_qasm_simulator')
 ####### Compile and run the Quantum circuit on a device backend #########
 """ 
 print("\nExecuting ...")
-job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
+job_ibmq = execute(qc, backend=backend_ibmq, shots=8*1024)
 
 # print("\nGo to job monitor")
 # job_monitor(job_ibmq)
@@ -96,21 +119,4 @@ job_ibmq = execute(qc, backend=backend_ibmq, shots=1024)
 Getting execution information
 """
 print_job_execution_information(job_ibmq)
-
-
-# """
-# Getting results
-# """
-# print("\nGo to job result")
-# result_ibmq = job_ibmq.result()
-#    
-# # Show the results.
-# print("\nRESULTS")
-# print(result_ibmq)
-#          
-# print("\nresult_counts")
-# print(result_ibmq.get_counts())
-#  
-# print("\n")
-# print_dict(result_ibmq.get_counts())
 
