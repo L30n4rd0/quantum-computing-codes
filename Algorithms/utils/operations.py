@@ -240,11 +240,6 @@ def print_psi(psi):
     print("Norma:")
     print_psi_norm(psi)
         
-#     temp = 2 * np.dot(psi, np.transpose(psi)) - np.identity(2**n_size, dtype=complex)
-#     print(temp)
-#     print("unitaria")
-#     print(np.dot(temp, np.transpose(temp)))
-
 
 
 def print_psi_norm(psi):
