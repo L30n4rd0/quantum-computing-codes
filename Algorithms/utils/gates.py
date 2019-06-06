@@ -130,3 +130,37 @@ def create_n_4_qwd_gate(n_qbits, m_marked_itens):
     return gate_matrix
 
 
+def create_controlled_u_gate(gate_matrix, controller):
+    """
+    Description:
+        Make a quantum controlled gate to use on the CQD model
+    Required Params:
+        gate_matrix: numpy two-dimensional square array that 
+        represents the matriz gate
+        controller: value that represents the controller (0 or 1)
+    Optional Params:
+        None
+    Return Value:
+        A quantum controlled gate to use on the CQD model
+    Example:
+
+    """
+    
+    gate_matrix_dim = len(gate_matrix)
+    
+    controlled_u_gate_dim = gate_matrix_dim * 2
+    
+    controlled_u_gate = np.identity(n=controlled_u_gate_dim, dtype=complex)
+    
+    shift = 2
+    shift_extra = controller
+    
+    for row in range(gate_matrix_dim):
+        for column in range(gate_matrix_dim):
+            controlled_u_gate[row * shift + shift_extra][column * shift + shift_extra] = \
+            gate_matrix[row][column]
+            
+    return controlled_u_gate
+    
+    
+    
