@@ -278,6 +278,9 @@ def plot_psi(psi, address_to_save):
     plt.xticks(rotation=70)
     # plt.legend(["Probabilidades"])
     
+    # Automatically adjust subplot parameters
+    plt.tight_layout()
+    
     # Showing the graph
 #     plt.show()
 
