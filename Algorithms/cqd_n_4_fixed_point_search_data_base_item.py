@@ -161,9 +161,3 @@ print_psi(psi)
 plot_psi(psi)
 
 
-# Creating qwd. On the article it is defined as
-# v in step 2
-v = create_n_4_qwd_gate(n, m)
-print("\nv operator")
-print(v)
-

@@ -35,16 +35,50 @@ from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi,
 
 if __name__ == '__main__':
     
-    # Tensor 2 Hadamard
-    tensor_h = apply_tensor_to_matrices_vector([h, h, h])
+#     # Tensor 2 Hadamard
+#     tensor_h = apply_tensor_to_matrices_vector([h, h, h])
+#     
+#     # psi_0 - tensor to qbits|001>
+#     psi = apply_tensor_to_matrices_vector([qubit_zero, qubit_zero, qubit_one])
+#     
+#     # psi_1 - applying tensor_h to psi_0
+#     psi = apply_gate_to_psi(tensor_h, psi)
+#     
+#     # Show psi_1 state
+#     print_psi(psi)
     
-    # psi_0 - tensor to qbits|001>
-    psi = apply_tensor_to_matrices_vector([qubit_zero, qubit_zero, qubit_one])
     
-    # psi_1 - applying tensor_h to psi_0
-    psi = apply_gate_to_psi(tensor_h, psi)
+    arrayA = np.array(
+        [
+            [1, 0, 0, 0], 
+            [0, 1, 0, 0], 
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ], dtype=int
+    )
     
-    # Show psi_1 state
-    print_psi(psi)
+    arrayB = np.array(
+        [
+            [1, 0], 
+            [0, 1]
+        ], dtype=int
+    )
+    
+    print("\ntensor")
+    tensor = np.tensordot(arrayA, arrayB, axes=0)
+    
+    print(tensor)
+    
+    temp = np.array([], dtype=int)
+    
+    for row_0 in tensor:
+        for index in range(len(arrayB)):
+            for row_1 in row_0:
+                temp = np.append(temp, row_1[index])
+
+    
+    c = np.reshape(temp, (len(arrayA) * len(arrayB), len(arrayA[0]) * len(arrayB[0])))
+     
+    print(c)
     
     

@@ -26,15 +26,15 @@ def apply_tensor(matrix_a, matrix_b):
         >>> m1 = [[1,2],[3,4]]
         >>> m2 = [[1,0],[0,1]]
         >>> apply_tensor(m1, m2)
-        [1, 0, 2, 0]
+        [[1, 0, 2, 0]
         [0, 1, 0, 2]
         [3, 0, 4, 0]
-        [0, 3, 0, 4]
+        [0, 3, 0, 4]]
         >>> apply_tensor(m2, m1)
-        [1, 2, 0, 0]
+        [[1, 2, 0, 0]
         [3, 4, 0, 0]
         [0, 0, 1, 2]
-        [0, 0, 3, 4]
+        [0, 0, 3, 4]]
     """
     
     # Converting the elements of matrices to complex data type
@@ -44,30 +44,44 @@ def apply_tensor(matrix_a, matrix_b):
     num_row_a, num_column_a = len(a), len(a[0])
     
     # Row and column number of matrix b
-    number_row_b, number_column_b = len(b), len(b[0])
+    num_row_b, num_column_b = len(b), len(b[0])
     
-    # Creating the tensor_result matrix and filling with ones (complex data type)
-    tensor_result = np.ones((len(a) * len(b), len(a[0]) * len(b[0])), dtype=complex)
+    tensor = np.tensordot(a, b, axes=0)
     
-    # Iterating matrix a
-    for row_a in range(num_row_a):
-        for column_a in range(num_column_a):
-            
-            # Iterating matrix b
-            for row_b in range(number_row_b):
-                for column_b in range(number_column_b):
-                    
-                    # Element to insert into tensor_result matrix
-                    element = a[row_a][column_a] * b[row_b][column_b]
-                    
-                    # Calculating the tensor row value (The number_row_b is the value to displacement, to shift, etc)
-                    row_tensor = (row_a * number_row_b) + row_b
-                    
-                    # Calculating the tensor column value (The number_column_b is the value to displacement, to shift, etc)
-                    column_tensor = (column_a * number_column_b) + column_b
-                    
-                    # Insert element into tensor_result matrix
-                    tensor_result[row_tensor][column_tensor] = element
+    temp = np.array([], dtype=complex)
+    
+    for row_0 in tensor:
+        for index in range(num_row_b):
+            for row_1 in row_0:
+                temp = np.append(temp, row_1[index])
+
+    
+    tensor_result = np.reshape(temp, (num_row_a * num_row_b, num_column_a * num_column_b))
+    
+    
+    
+    
+#     # Creating the tensor_result matrix and filling with ones (complex data type)
+#     tensor_result = np.ones((num_row_a * num_row_b, num_column_a * num_column_b), dtype=complex)
+#     # Iterating matrix a
+#     for row_a in range(num_row_a):
+#         for column_a in range(num_column_a):
+#             
+#             # Iterating matrix b
+#             for row_b in range(num_row_b):
+#                 for column_b in range(num_column_b):
+#                     
+#                     # Element to insert into tensor_result matrix
+#                     element = a[row_a][column_a] * b[row_b][column_b]
+#                     
+#                     # Calculating the tensor row value (The num_row_b is the value to displacement, to shift, etc)
+#                     row_tensor = (row_a * num_row_b) + row_b
+#                     
+#                     # Calculating the tensor column value (The num_column_b is the value to displacement, to shift, etc)
+#                     column_tensor = (column_a * num_column_b) + column_b
+#                     
+#                     # Insert element into tensor_result matrix
+#                     tensor_result[row_tensor][column_tensor] = element
     
     # Returning tensor_result
     return tensor_result
