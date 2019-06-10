@@ -46,42 +46,41 @@ def apply_tensor(matrix_a, matrix_b):
     # Row and column number of matrix b
     num_row_b, num_column_b = len(b), len(b[0])
     
-    tensor = np.tensordot(a, b, axes=0)
-    
-    temp = np.array([], dtype=complex)
-    
-    for row_0 in tensor:
-        for index in range(num_row_b):
-            for row_1 in row_0:
-                temp = np.append(temp, row_1[index])
-
-    
-    tensor_result = np.reshape(temp, (num_row_a * num_row_b, num_column_a * num_column_b))
-    
+#     tensor = np.tensordot(a, b, axes=0)
+#     
+#     temp = np.array([], dtype=complex)
+#     
+#     for row_0 in tensor:
+#         for index in range(num_row_b):
+#             for row_1 in row_0:
+#                 temp = np.append(temp, row_1[index])
+# 
+#     tensor_result = np.reshape(temp, (num_row_a * num_row_b, num_column_a * num_column_b))
     
     
     
-#     # Creating the tensor_result matrix and filling with ones (complex data type)
-#     tensor_result = np.ones((num_row_a * num_row_b, num_column_a * num_column_b), dtype=complex)
-#     # Iterating matrix a
-#     for row_a in range(num_row_a):
-#         for column_a in range(num_column_a):
-#             
-#             # Iterating matrix b
-#             for row_b in range(num_row_b):
-#                 for column_b in range(num_column_b):
-#                     
-#                     # Element to insert into tensor_result matrix
-#                     element = a[row_a][column_a] * b[row_b][column_b]
-#                     
-#                     # Calculating the tensor row value (The num_row_b is the value to displacement, to shift, etc)
-#                     row_tensor = (row_a * num_row_b) + row_b
-#                     
-#                     # Calculating the tensor column value (The num_column_b is the value to displacement, to shift, etc)
-#                     column_tensor = (column_a * num_column_b) + column_b
-#                     
-#                     # Insert element into tensor_result matrix
-#                     tensor_result[row_tensor][column_tensor] = element
+    
+    # Creating the tensor_result matrix and filling with ones (complex data type)
+    tensor_result = np.ones((num_row_a * num_row_b, num_column_a * num_column_b), dtype=complex)
+    # Iterating matrix a
+    for row_a in range(num_row_a):
+        for column_a in range(num_column_a):
+             
+            # Iterating matrix b
+            for row_b in range(num_row_b):
+                for column_b in range(num_column_b):
+                     
+                    # Element to insert into tensor_result matrix
+                    element = a[row_a][column_a] * b[row_b][column_b]
+                     
+                    # Calculating the tensor row value (The num_row_b is the value to displacement, to shift, etc)
+                    row_tensor = (row_a * num_row_b) + row_b
+                     
+                    # Calculating the tensor column value (The num_column_b is the value to displacement, to shift, etc)
+                    column_tensor = (column_a * num_column_b) + column_b
+                     
+                    # Insert element into tensor_result matrix
+                    tensor_result[row_tensor][column_tensor] = element
     
     # Returning tensor_result
     return tensor_result
@@ -262,7 +261,7 @@ def print_psi_norm(psi):
     
     
     
-def plot_psi(psi):
+def plot_psi(psi, address_to_save):
     
     # Qubits number 'n' used on the circuit
     n_size = np.log2(len(psi))
@@ -270,15 +269,24 @@ def plot_psi(psi):
      
     states = calculate_binary_values_states(psi)
     probabilities = calculate_probabilities(psi)
-        
     
     plt.title("Gráfico de probabilidades")
     plt.xlabel("Estados")
     plt.ylabel("Probabilidades")
     
-    plt.bar(states, probabilities, label="Probabilidades")
+    plt.bar(x=states, height=probabilities, width=0.8, bottom=None)
     plt.xticks(rotation=70)
-#     plt.legend()
+    # plt.legend(["Probabilidades"])
     
-    plt.show()
+    # Showing the graph
+#     plt.show()
+
+    # Saving the figure with better resolution
+    plt.savefig(address_to_save, dpi=300)
     
+    # Clear the entire current figure with all its axes
+    plt.clf()
+    
+    # Close the current figure window
+    plt.close()
+
