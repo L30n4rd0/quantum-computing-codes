@@ -101,8 +101,6 @@ def create_n_4_qwd_gate(n_qbits, m_marked_itens):
     Example:
 
     """
-    # só para testar com dois 2 bits de trabalho
-#     n_qbits = n_qbits + 1
     
     n_data_base_size = 2 ** n_qbits
     
