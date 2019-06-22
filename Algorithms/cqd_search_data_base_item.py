@@ -10,12 +10,18 @@ from utils.gates import i, z, h
 from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, print_psi, apply_projective_operator, plot_psi
 from utils.qbits import qubit_one, qubit_zero
 
+############################################################
+####### Circuit Properties #################################
+############################################################
 # Number of qbits that algorithm will computer
 n = 3
 
 # Item to search: |111....11>
 item_to_search = apply_n_tensor_to(n + 1, qubit_one)
 
+############################################################
+####### Circuit Gates ######################################
+############################################################
 item_to_search_projector = np.dot(item_to_search, np.transpose(item_to_search))
 print("\nitem_to_search_projector")
 print(item_to_search_projector)
@@ -48,6 +54,9 @@ tensor_i_h = apply_tensor(tensor_i, h)
 # Creating projection_operator
 projection_operator = apply_tensor(tensor_i, np.dot(qubit_zero, np.transpose(qubit_zero)))
 
+############################################################
+####### Circuit Execution ##################################
+############################################################
 # psi_0 - Creating tensor product between inputs: |000000>
 psi = apply_n_tensor_to(n + 1, qubit_zero)
 print("\npsi_0 - Creating tensor product between inputs: |000000>\n")
