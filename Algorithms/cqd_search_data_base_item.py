@@ -14,7 +14,7 @@ from utils.qbits import qubit_one, qubit_zero
 ####### Circuit Properties #################################
 ############################################################
 # Number of qbits that algorithm will computer
-n = 3
+n = 4
 
 # Item to search: |111....11>
 item_to_search = apply_n_tensor_to(n + 1, qubit_one)
@@ -81,16 +81,23 @@ print_psi(psi)
 psi = apply_gate_to_psi(tensor_i_h, psi)
 print("\npsi_4 - Applying (combiner) to psi\n")
 print_psi(psi)
-plot_psi(psi)
-
-# print("Projective")
-# print(projection_operator)
+plot_psi(
+    psi, 
+    'cqd_search_data_base_item_plots/' + 
+    'cqd_search_data_base_item_plots_before_projection_operator_' + 
+    '1_marked_itens.png'
+    )
 
 # psi_5 - Applying projection_operator to psi_4
 psi = apply_projective_operator(projection_operator, psi)
 print("\npsi_5 - Applying projection_operator to psi\n")
 print_psi(psi)
-plot_psi(psi)
+plot_psi(
+    psi, 
+    'cqd_search_data_base_item_plots/' + 
+    'cqd_search_data_base_item_plots_after_projection_operator_' + 
+    '1_marked_itens.png'
+    )
     
     
     
