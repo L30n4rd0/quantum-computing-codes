@@ -158,7 +158,7 @@ for index in range(1, max_marked_items+1, 1):
     print_psi(psi)
     plot_psi(
         psi, 
-        'cqd_n_4_fixed_point_search_data_base_item_plots/' + 
+        'plots_cqd_n_4_fixed_point_search_data_base_item/' + 
         'cqd_n_4_fixed_point_search_item_before_projection_operator_' + 
         str(m) + '_marked_itens.png'
         )
@@ -170,7 +170,7 @@ for index in range(1, max_marked_items+1, 1):
     print_psi(psi)
     plot_psi(
         psi, 
-        'cqd_n_4_fixed_point_search_data_base_item_plots/' + 
+        'plots_cqd_n_4_fixed_point_search_data_base_item/' + 
         'cqd_n_4_fixed_point_search_item_after_projection_operator_' + 
         str(m) + '_marked_itens.png'
         )

@@ -83,7 +83,7 @@ print("\npsi_4 - Applying (combiner) to psi\n")
 print_psi(psi)
 plot_psi(
     psi, 
-    'cqd_search_data_base_item_plots/' + 
+    'plots_cqd_search_data_base_item/' + 
     'cqd_search_data_base_item_plots_before_projection_operator_' + 
     '1_marked_itens.png'
     )
@@ -94,7 +94,7 @@ print("\npsi_5 - Applying projection_operator to psi\n")
 print_psi(psi)
 plot_psi(
     psi, 
-    'cqd_search_data_base_item_plots/' + 
+    'plots_cqd_search_data_base_item/' + 
     'cqd_search_data_base_item_plots_after_projection_operator_' + 
     '1_marked_itens.png'
     )
