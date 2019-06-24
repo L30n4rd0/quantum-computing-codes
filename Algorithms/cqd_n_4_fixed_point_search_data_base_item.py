@@ -1,15 +1,17 @@
 """
 Created on April 5, 2019
 
-Simulation of the article An N/4 fixed-point duality quantum search algorithm - HAO Liang et al - 2010
+Simulation of the article An N/4 fixed-point duality quantum search algorithm - 
+HAO Liang et al - 2010
 
 @author: leonardo
 """
 
 
 import numpy as np
-from utils.gates import i, z, h, create_n_4_qwd_gate, create_controlled_u_gate
-from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, print_psi, apply_projective_operator, plot_psi
+from utils.gates import i, h, create_n_4_qwd_gate, create_controlled_u_gate
+from utils.operations import apply_tensor, apply_n_tensor_to, \
+apply_gate_to_psi, print_psi, apply_projective_operator, plot_psi
 from utils.qbits import qubit_zero
 
 # Max marked items on the data base
@@ -161,7 +163,7 @@ for index in range(1, max_marked_items+1, 1):
         'plots_cqd_n_4_fixed_point_search_data_base_item/' + 
         'cqd_n_4_fixed_point_search_item_before_projection_operator_' + 
         str(m) + '_marked_itens.png'
-        )
+    )
     
     
     # psi_7 - Applying projection_operator to psi_6
@@ -173,6 +175,5 @@ for index in range(1, max_marked_items+1, 1):
         'plots_cqd_n_4_fixed_point_search_data_base_item/' + 
         'cqd_n_4_fixed_point_search_item_after_projection_operator_' + 
         str(m) + '_marked_itens.png'
-        )
-    
+    )
     

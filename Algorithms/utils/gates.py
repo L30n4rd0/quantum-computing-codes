@@ -90,7 +90,8 @@ def create_n_4_qwd_gate(n_qbits, m_marked_itens):
     Description:
         Make a quantum wave divider gate as specified on
         equation 22 in the article
-        An N/4 fixed-point duality quantum search algorithm - HAO Liang et al - 2010
+        An N/4 fixed-point duality quantum search algorithm - 
+        HAO Liang et al - 2010
     Required Params:
         n_qbits: Number of work qbits that algorithm will computer
         m_marked_itens: Number of items marked on the data base
@@ -104,15 +105,21 @@ def create_n_4_qwd_gate(n_qbits, m_marked_itens):
     
     n_data_base_size = 2 ** n_qbits
     
-    a = np.sqrt( n_data_base_size / (2 * n_data_base_size - 4 * m_marked_itens) )
+    a = np.sqrt(n_data_base_size / (2 * n_data_base_size - 4 * m_marked_itens))
     b = None
     
     if m_marked_itens <= n_data_base_size / 4:
-        b = np.sqrt( (n_data_base_size - 4 * m_marked_itens) / (2 * n_data_base_size - 4 * m_marked_itens) )
+        b = np.sqrt( 
+            (n_data_base_size - 4 * m_marked_itens) / 
+            (2 * n_data_base_size - 4 * m_marked_itens) 
+        )
         print("\nunitary v operator")
         
     else:
-        b = np.sqrt( (4 * m_marked_itens - n_data_base_size) / (2 * n_data_base_size - 4 * m_marked_itens) )
+        b = np.sqrt( 
+            (4 * m_marked_itens - n_data_base_size) / 
+            (2 * n_data_base_size - 4 * m_marked_itens) 
+        )
         b = np.complex(0, b)
         print("\nnon unitary v operator")
     
@@ -155,8 +162,8 @@ def create_controlled_u_gate(gate_matrix, controller):
     
     for row in range(gate_matrix_dim):
         for column in range(gate_matrix_dim):
-            controlled_u_gate[row * shift + shift_extra][column * shift + shift_extra] = \
-            gate_matrix[row][column]
+            controlled_u_gate[row * shift + shift_extra] \
+            [column * shift + shift_extra] = gate_matrix[row][column]
             
     return controlled_u_gate
     

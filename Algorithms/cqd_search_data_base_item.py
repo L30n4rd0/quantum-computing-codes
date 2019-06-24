@@ -7,7 +7,8 @@ Created on Feb 2, 2019
 
 import numpy as np
 from utils.gates import i, z, h
-from utils.operations import apply_tensor, apply_n_tensor_to, apply_gate_to_psi, print_psi, apply_projective_operator, plot_psi
+from utils.operations import apply_tensor, apply_n_tensor_to, \
+apply_gate_to_psi, print_psi, apply_projective_operator, plot_psi
 from utils.qbits import qubit_one, qubit_zero
 
 ############################################################
@@ -52,7 +53,10 @@ tensor_h = apply_n_tensor_to(n + 1, h)
 tensor_i_h = apply_tensor(tensor_i, h)
 
 # Creating projection_operator
-projection_operator = apply_tensor(tensor_i, np.dot(qubit_zero, np.transpose(qubit_zero)))
+projection_operator = apply_tensor(
+    tensor_i, 
+    np.dot(qubit_zero, np.transpose(qubit_zero))
+)
 
 ############################################################
 ####### Circuit Execution ##################################
@@ -86,7 +90,7 @@ plot_psi(
     'plots_cqd_search_data_base_item/' + 
     'cqd_search_data_base_item_plots_before_projection_operator_' + 
     '1_marked_itens.png'
-    )
+)
 
 # psi_5 - Applying projection_operator to psi_4
 psi = apply_projective_operator(projection_operator, psi)
@@ -97,7 +101,5 @@ plot_psi(
     'plots_cqd_search_data_base_item/' + 
     'cqd_search_data_base_item_plots_after_projection_operator_' + 
     '1_marked_itens.png'
-    )
-    
-    
+)
     

@@ -8,8 +8,6 @@ import numpy as np
 from numpy import sqrt
 import matplotlib.pyplot as plt
 
-
-
 def apply_tensor(matrix_a, matrix_b):
     
     """
@@ -38,13 +36,17 @@ def apply_tensor(matrix_a, matrix_b):
     """
     
     # Converting the elements of matrices to complex data type
-    a, b = np.array(matrix_a, dtype = complex), np.array(matrix_b, dtype = complex)
+    a = np.array(matrix_a, dtype = complex)
+    b = np.array(matrix_b, dtype = complex)
     
     # Row and column number of matrix a
     num_row_a, num_column_a = len(a), len(a[0])
     
     # Row and column number of matrix b
     num_row_b, num_column_b = len(b), len(b[0])
+
+    # Another way of calculating the tensor product 
+    # using the Numpy tensor method
     
 #     tensor = np.tensordot(a, b, axes=0)
 #     
@@ -55,13 +57,19 @@ def apply_tensor(matrix_a, matrix_b):
 #             for row_1 in row_0:
 #                 temp = np.append(temp, row_1[index])
 # 
-#     tensor_result = np.reshape(temp, (num_row_a * num_row_b, num_column_a * num_column_b))
+#     tensor_result = np.reshape(
+#         temp, 
+#         (num_row_a * num_row_b, num_column_a * num_column_b)
+#     )
     
     
     
     
-    # Creating the tensor_result matrix and filling with ones (complex data type)
-    tensor_result = np.ones((num_row_a * num_row_b, num_column_a * num_column_b), dtype=complex)
+    # Creating the tensor_result matrix and filling with ones
+    tensor_result = np.ones(
+        (num_row_a * num_row_b, num_column_a * num_column_b), 
+        dtype=complex
+    )
     # Iterating matrix a
     for row_a in range(num_row_a):
         for column_a in range(num_column_a):
@@ -73,10 +81,12 @@ def apply_tensor(matrix_a, matrix_b):
                     # Element to insert into tensor_result matrix
                     element = a[row_a][column_a] * b[row_b][column_b]
                      
-                    # Calculating the tensor row value (The num_row_b is the value to displacement, to shift, etc)
+                    # Calculating the tensor row value (The num_row_b is the 
+                    # value to displacement, to shift, etc)
                     row_tensor = (row_a * num_row_b) + row_b
                      
-                    # Calculating the tensor column value (The num_column_b is the value to displacement, to shift, etc)
+                    # Calculating the tensor column value (The num_column_b is 
+                    # the value to displacement, to shift, etc)
                     column_tensor = (column_a * num_column_b) + column_b
                      
                     # Insert element into tensor_result matrix
@@ -84,7 +94,6 @@ def apply_tensor(matrix_a, matrix_b):
     
     # Returning tensor_result
     return tensor_result
-
 
 
 def apply_n_tensor_to(tensor_number, matrix_u):
@@ -122,7 +131,6 @@ def apply_n_tensor_to(tensor_number, matrix_u):
     return result_matrix
 
 
-
 def apply_tensor_to_matrices_vector(matrices_vector):
     
     """
@@ -152,18 +160,20 @@ def apply_tensor_to_matrices_vector(matrices_vector):
     
     # Applying tensor product between all matrices
     for i in range(1, len(matrices_vector)):
-        result_matrix = apply_tensor(result_matrix, np.array(matrices_vector[i], dtype = complex))
+        result_matrix = apply_tensor(
+            result_matrix, 
+            np.array(matrices_vector[i], dtype = complex)
+        )
         
     # Returning tensor result_matrix
     return result_matrix
-
 
 
 def apply_gate_to_psi(matrix_gate, matrix_psi):
     
     """
     Description:
-        Apply the gate to the psi state (Using the 'dot' operation of numpy library) 
+        Apply the gate to the psi state (Using the 'dot' operation of numpy) 
     Required Params:
         matrix_gate: Any matrix of any gate
         matrix_psi: Matrix of any psi state 
@@ -179,14 +189,14 @@ def apply_gate_to_psi(matrix_gate, matrix_psi):
     """
     
     # Converting the elements of matrices to complex data type
-    temp_gate, temp_psi = np.array(matrix_gate, dtype = complex), np.array(matrix_psi, dtype = complex)
+    temp_gate = np.array(matrix_gate, dtype = complex)
+    temp_psi = np.array(matrix_psi, dtype = complex)
     
     # Applying the gate to the psi state
     psi_result = np.dot(temp_gate, temp_psi)
     
     # Returning psi_result
     return psi_result
-
 
 
 def apply_projective_operator(operator, psi):
@@ -214,7 +224,6 @@ def apply_projective_operator(operator, psi):
     return result
 
 
-
 def calculate_probabilities(psi):
     probabilities = []
     
@@ -223,7 +232,6 @@ def calculate_probabilities(psi):
         probabilities.append(probability.real)
     
     return probabilities
-    
 
 
 def calculate_binary_values_states(psi):
@@ -240,8 +248,6 @@ def calculate_binary_values_states(psi):
     return states
 
 
-
-
 def print_psi(psi):
     
     states = calculate_binary_values_states(psi)
@@ -249,16 +255,13 @@ def print_psi(psi):
     for index in range(len(psi)):
         print( psi[index][0], '\t|%s> %d' % (states[index], index) )
     
-    
     print("Norma:")
     print_psi_norm(psi)
-        
 
 
 def print_psi_norm(psi):
     norm = sum(calculate_probabilities(psi))
     print(norm)
-    
     
     
 def plot_psi(psi, address_to_save):
@@ -292,4 +295,3 @@ def plot_psi(psi, address_to_save):
     
     # Close the current figure window
     plt.close()
-
